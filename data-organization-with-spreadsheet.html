@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Data Organization with Spreadsheet | R Manual</title>
+  <meta name="description" content="R and Manul" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Data Organization with Spreadsheet | R Manual" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/fig/MWULogo.jpeg" />
+  <meta property="og:description" content="R and Manul" />
+  <meta name="github-repo" content="Chapter 1 Data Organization with Spreadsheet | R Manual" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Data Organization with Spreadsheet | R Manual" />
+  
+  <meta name="twitter:description" content="R and Manul" />
+  <meta name="twitter:image" content="/fig/MWULogo.jpeg" />
+
+
+
+<meta name="date" content="2022-05-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="data-cleaning-with-openrefine.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-information-and-conventions"><i class="fa fa-check"></i>Software information and conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html"><i class="fa fa-check"></i><b>1</b> Data Organization with Spreadsheet</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#spreadsheet-programs"><i class="fa fa-check"></i><b>1.1</b> Spreadsheet Programs</a></li>
+<li class="chapter" data-level="1.2" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#formatting-data-tables"><i class="fa fa-check"></i><b>1.2</b> Formatting data tables</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#problems-with-spreadsheets"><i class="fa fa-check"></i><b>1.2.1</b> Problems with Spreadsheets</a></li>
+<li class="chapter" data-level="1.2.2" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#use-of-spreadsheets-for-data-entery-and-cleaning"><i class="fa fa-check"></i><b>1.2.2</b> Use of Spreadsheets for Data Entery and Cleaning</a></li>
+<li class="chapter" data-level="1.2.3" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#keeping-track-of-your-analyses"><i class="fa fa-check"></i><b>1.2.3</b> Keeping track of your analyses</a></li>
+<li class="chapter" data-level="1.2.4" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#structuring-data-in-spreadsheets"><i class="fa fa-check"></i><b>1.2.4</b> Structuring data in spreadsheets</a></li>
+<li class="chapter" data-level="1.2.5" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#columns-for-variables-and-rows-for-observations"><i class="fa fa-check"></i><b>1.2.5</b> Columns for variables and rows for observations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#common-spreadsheet-errors"><i class="fa fa-check"></i><b>1.3</b> Common Spreadsheet Errors</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#using-multiple-tabs"><i class="fa fa-check"></i><b>1.3.1</b> Using multiple tabs</a></li>
+<li class="chapter" data-level="1.3.2" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#not-filling-in-zeros"><i class="fa fa-check"></i><b>1.3.2</b> Not filling in zeros</a></li>
+<li class="chapter" data-level="1.3.3" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#using-problematic-null-values"><i class="fa fa-check"></i><b>1.3.3</b> Using problematic null values</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#date-as-data"><i class="fa fa-check"></i><b>1.4</b> Date as data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning with OpenRefine</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#layout"><i class="fa fa-check"></i><b>2.1</b> Layout</a></li>
+<li class="chapter" data-level="2.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#records-and-rows"><i class="fa fa-check"></i><b>2.2</b> Records and Rows</a></li>
+<li class="chapter" data-level="2.3" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#changing-the-grid-view"><i class="fa fa-check"></i><b>2.3</b> Changing the Grid View</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#permanent-changes"><i class="fa fa-check"></i><b>2.3.1</b> Permanent Changes</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#non-permanent-changes"><i class="fa fa-check"></i><b>2.3.2</b> Non-Permanent Changes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-mining-and-discovery"><i class="fa fa-check"></i><b>2.4</b> Data Mining and Discovery</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#reordering-columns"><i class="fa fa-check"></i><b>2.4.1</b> Reordering Columns</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#sorting-data"><i class="fa fa-check"></i><b>2.4.2</b> Sorting Data</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#text-based-discovery"><i class="fa fa-check"></i><b>2.4.3</b> Text Based Discovery</a></li>
+<li class="chapter" data-level="2.4.4" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#number-and-data-based-discovery"><i class="fa fa-check"></i><b>2.4.4</b> Number and Data Based Discovery</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-preparation-and-normalization"><i class="fa fa-check"></i><b>2.5</b> Data Preparation and Normalization</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#common-transformations"><i class="fa fa-check"></i><b>2.5.1</b> Common Transformations</a></li>
+<li class="chapter" data-level="2.5.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#removing-duplicates"><i class="fa fa-check"></i><b>2.5.2</b> Removing Duplicates</a></li>
+<li class="chapter" data-level="2.5.3" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#splitting-cell-values"><i class="fa fa-check"></i><b>2.5.3</b> Splitting Cell Values</a></li>
+<li class="chapter" data-level="2.5.4" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#combining-cell-values"><i class="fa fa-check"></i><b>2.5.4</b> Combining cell Values</a></li>
+<li class="chapter" data-level="2.5.5" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-shaping"><i class="fa fa-check"></i><b>2.5.5</b> Data Shaping</a></li>
+<li class="chapter" data-level="2.5.6" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#clustering"><i class="fa fa-check"></i><b>2.5.6</b> Clustering</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html"><i class="fa fa-check"></i><b>3</b> Data Analysis with R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#what-is-r-what-is-rstudio"><i class="fa fa-check"></i><b>3.1</b> What is R? What is RStudio?</a></li>
+<li class="chapter" data-level="3.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#why-learn-r"><i class="fa fa-check"></i><b>3.2</b> Why learn R?</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-does-not-involve-lots-of-pointing-and-clicking-and-thats-a-good-thing"><i class="fa fa-check"></i><b>3.2.1</b> R does not involve lots of pointing and clicking, and that’s a good thing</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-code-is-great-for-reproducibility"><i class="fa fa-check"></i><b>3.2.2</b> R code is great for reproducibility</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-is-interdisciplinary-and-extensible"><i class="fa fa-check"></i><b>3.2.3</b> R is interdisciplinary and extensible</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-works-on-data-of-all-shapes-and-sizes"><i class="fa fa-check"></i><b>3.2.4</b> R works on data of all shapes and sizes</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-produces-high-quality-graphics"><i class="fa fa-check"></i><b>3.2.5</b> R produces high-quality graphics</a></li>
+<li class="chapter" data-level="3.2.6" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-has-a-large-and-welcoming-community"><i class="fa fa-check"></i><b>3.2.6</b> R has a large and welcoming community</a></li>
+<li class="chapter" data-level="3.2.7" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#not-only-is-r-free-but-it-is-also-open-source-and-cross-platform"><i class="fa fa-check"></i><b>3.2.7</b> Not only is R free, but it is also open-source and cross-platform</a></li>
+<li class="chapter" data-level="3.2.8" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#knowing-your-way-around-rstudio"><i class="fa fa-check"></i><b>3.2.8</b> Knowing your way around RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#introduction-to-r"><i class="fa fa-check"></i><b>3.3</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#comments"><i class="fa fa-check"></i><b>3.3.1</b> Comments</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#functions-and-their-arguments"><i class="fa fa-check"></i><b>3.3.2</b> Functions and their arguments</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#data-structure"><i class="fa fa-check"></i><b>3.3.3</b> Data Structure</a></li>
+<li class="chapter" data-level="3.3.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3.4</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="3.3.5" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#conditional-subsetting"><i class="fa fa-check"></i><b>3.3.5</b> Conditional subsetting</a></li>
+<li class="chapter" data-level="3.3.6" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#missing-data"><i class="fa fa-check"></i><b>3.3.6</b> Missing Data</a></li>
+<li class="chapter" data-level="3.3.7" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#matrices"><i class="fa fa-check"></i><b>3.3.7</b> Matrices</a></li>
+<li class="chapter" data-level="3.3.8" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#data-frames"><i class="fa fa-check"></i><b>3.3.8</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#starting-with-data"><i class="fa fa-check"></i><b>3.4</b> Starting with data</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#inspecting-data-frame-objects"><i class="fa fa-check"></i><b>3.4.1</b> Inspecting Data Frame Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#indexing-and-subsetting-data-frames"><i class="fa fa-check"></i><b>3.5</b> Indexing and subsetting data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#factors-1"><i class="fa fa-check"></i><b>3.6</b> Factors</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#converting-factors"><i class="fa fa-check"></i><b>3.6.1</b> Converting factors</a></li>
+<li class="chapter" data-level="3.6.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#renaming-factors"><i class="fa fa-check"></i><b>3.6.2</b> Renaming factors</a></li>
+<li class="chapter" data-level="3.6.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#using-stringsasfactorsfalse"><i class="fa fa-check"></i><b>3.6.3</b> Using <code>stringsAsFactors=FALSE</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#formatting-dates"><i class="fa fa-check"></i><b>3.7</b> Formatting Dates</a></li>
+<li class="chapter" data-level="3.8" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#manipulating-and-analyzing-data-with-tidyverse"><i class="fa fa-check"></i><b>3.8</b> manipulating and analyzing data with tidyverse</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#data-manipulation-using-dplyr-and-tidyr"><i class="fa fa-check"></i><b>3.8.1</b> Data Manipulation using <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>3.9</b> Exploratory data analysis</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#statistical-variables-and-data"><i class="fa fa-check"></i><b>3.9.1</b> Statistical variables and data</a></li>
+<li class="chapter" data-level="3.9.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#understanding-numerical-variables"><i class="fa fa-check"></i><b>3.9.2</b> Understanding numerical variables</a></li>
+<li class="chapter" data-level="3.9.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#understanding-categorical-variables"><i class="fa fa-check"></i><b>3.9.3</b> Understanding categorical variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#regression-with-r"><i class="fa fa-check"></i><b>3.10</b> Regression with R</a>
+<ul>
+<li class="chapter" data-level="3.10.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#hypotheses-and-null-hypotheses"><i class="fa fa-check"></i><b>3.10.1</b> Hypotheses and null hypotheses</a></li>
+<li class="chapter" data-level="3.10.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#linear-regression"><i class="fa fa-check"></i><b>3.10.2</b> Linear Regression</a></li>
+<li class="chapter" data-level="3.10.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#generalized-linear-modelglm"><i class="fa fa-check"></i><b>3.10.3</b> Generalized Linear Model(GLM)</a></li>
+<li class="chapter" data-level="3.10.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#logistic-regression"><i class="fa fa-check"></i><b>3.10.4</b> Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#anova-with-r"><i class="fa fa-check"></i><b>3.11</b> Anova with R</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html"><i class="fa fa-check"></i><b>4</b> Data Visualization with R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#basics-of-ggplot2"><i class="fa fa-check"></i><b>4.1</b> Basics of ggplot2</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#importing-data"><i class="fa fa-check"></i><b>4.1.1</b> Importing data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#scatter-plot"><i class="fa fa-check"></i><b>4.1.2</b> Scatter plot</a></li>
+<li class="chapter" data-level="4.1.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#bar-plot"><i class="fa fa-check"></i><b>4.1.3</b> Bar Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#boxplots"><i class="fa fa-check"></i><b>4.2</b> Boxplots</a></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#plotting-time-series-data"><i class="fa fa-check"></i><b>4.3</b> Plotting time series data</a></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#line-plot"><i class="fa fa-check"></i><b>4.4</b> Line Plot</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#histograpm"><i class="fa fa-check"></i><b>4.5</b> Histograpm</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#map"><i class="fa fa-check"></i><b>4.6</b> Map</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#map-color"><i class="fa fa-check"></i><b>4.6.1</b> Map color</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html"><i class="fa fa-check"></i><b>5</b> Manuscript Preparation with RMarkdown in R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#publishing-with-r-markdown"><i class="fa fa-check"></i><b>5.1</b> Publishing with R Markdown</a></li>
+<li class="chapter" data-level="5.2" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#r-markdown-syntax"><i class="fa fa-check"></i><b>5.2</b> R Markdown Syntax</a></li>
+<li class="chapter" data-level="5.3" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#rendering-output"><i class="fa fa-check"></i><b>5.3</b> Rendering output</a></li>
+<li class="chapter" data-level="5.4" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#how-it-works"><i class="fa fa-check"></i><b>5.4</b> How it works</a></li>
+<li class="chapter" data-level="5.5" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#code-chunks"><i class="fa fa-check"></i><b>5.5</b> Code Chunks</a></li>
+<li class="chapter" data-level="5.6" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#inline-code"><i class="fa fa-check"></i><b>5.6</b> Inline Code</a></li>
+<li class="chapter" data-level="5.7" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#code-languages"><i class="fa fa-check"></i><b>5.7</b> Code Languages</a></li>
+<li class="chapter" data-level="5.8" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#academic-journals"><i class="fa fa-check"></i><b>5.8</b> Academic Journals</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#get-started"><i class="fa fa-check"></i><b>5.8.1</b> Get started</a></li>
+<li class="chapter" data-level="5.8.2" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#rticles-templates"><i class="fa fa-check"></i><b>5.8.2</b> rticles templates</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="" data-path="appendex-1.html"><a href="appendex-1.html"><i class="fa fa-check"></i>Appendex 1</a>
+<ul>
+<li class="chapter" data-level="9" data-path="appendex-1.html"><a href="appendex-1.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>9</b> Installing R and Rstudio</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="appendex-1.html"><a href="appendex-1.html#installing-r"><i class="fa fa-check"></i><b>9.1</b> installing R</a></li>
+<li class="chapter" data-level="9.2" data-path="appendex-1.html"><a href="appendex-1.html#installing-rstudio"><i class="fa fa-check"></i><b>9.2</b> Installing RStudio</a></li>
+<li class="chapter" data-level="9.3" data-path="appendex-1.html"><a href="appendex-1.html#open-rstudio"><i class="fa fa-check"></i><b>9.3</b> Open RStudio</a></li>
+<li class="chapter" data-level="9.4" data-path="appendex-1.html"><a href="appendex-1.html#installing-r-packages"><i class="fa fa-check"></i><b>9.4</b> Installing R packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://mesfind.github.io" target="blank">&copy Mesfin Diro</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Data analysis and Visualization<br />
+<br />
+Participant Manual<br />
+<br />
+<img src="fig/MWULogo.jpeg" style="width:1.2in" /></div></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-organization-with-spreadsheet" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Data Organization with Spreadsheet<a href="data-organization-with-spreadsheet.html#data-organization-with-spreadsheet" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li><p>Any research project’s cornerstone is good data organization. Because most researchers keep their data in spreadsheets, many research initiatives begin there.</p></li>
+<li><p>In spreadsheets, we organize data in the ways that we wish to work with it as humans, while computers demand that data be organized in specific ways. We must organize our data in the way that computers require it in order to employ tools that make computation more efficient, such as programming languages like R or Python. Since most research projects begin here, we’d like to begin here as well!</p></li>
+<li><p>However, you will not learn about data analysis with spreadsheets in this lesson. As a researcher, you’ll spend a lot of time organizing data so you can do good analysis afterwards. It isn’t the most enjoyable task, but it is important. This session will teach you how to think about data organization and some data wrangling best practices. This method allows you to properly prepare existing data and organize new data collection, resulting in less data wrangling.</p></li>
+</ul>
+<div id="spreadsheet-programs" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Spreadsheet Programs<a href="data-organization-with-spreadsheet.html#spreadsheet-programs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Good data organization is the foundation of your research project. Most researchers have data or do data entry in spreadsheets. Spreadsheet programs are very useful graphical interfaces for designing data tables and handling very basic data quality control functions.</p></li>
+<li><p>Spreadsheet programs encompass a lot of the things we need to be able to do as researchers. We can use them for:</p>
+<ul>
+<li>Data entry</li>
+<li>Organizing data</li>
+<li>Subsetting and sorting data</li>
+<li>Statistics</li>
+<li>Plotting</li>
+</ul></li>
+</ul>
+</div>
+<div id="formatting-data-tables" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Formatting data tables<a href="data-organization-with-spreadsheet.html#formatting-data-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>The most common mistake is using spreadsheet tools as lab notebooks, relying on context, margin notes, and data and field spatial layout to convey information. We can (usually) interpret these things as humans, but computers don’t see information in the same way, and unless we explain everything to the computer (which can be difficult! ), it won’t be able to see how our data fits together.</p></li>
+<li><p>We can handle and analyze data much more effectively and quickly with the help of computers, but we must first prepare our data so that the computer can interpret it (and computers are very literal).</p></li>
+</ul>
+<p><strong>Why aren’t we teaching data analysis in spreadsheets</strong>:</p>
+<ul>
+<li>Data analysis in spreadsheets normally requires a significant amount of human labor. You normally have to redo everything by hand if you want to alter a parameter or run an analysis with a different dataset. (We know you can make macros; nevertheless, see the next point.)</li>
+</ul>
+<div id="problems-with-spreadsheets" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Problems with Spreadsheets<a href="data-organization-with-spreadsheet.html#problems-with-spreadsheets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Spreadsheets are good for data entry, but we use them for much more than that. Use them to create data tables for publications, generate statistics and make figures. <strong>Spreadsheets can be used with caution if you want to replicate your steps in another person’s work</strong>.</p>
+</div>
+<div id="use-of-spreadsheets-for-data-entery-and-cleaning" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Use of Spreadsheets for Data Entery and Cleaning<a href="data-organization-with-spreadsheet.html#use-of-spreadsheets-for-data-entery-and-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>However, there are times when you’ll want to use a spreadsheet tool to make “quick and dirty” calculations or figures, and data cleaning will make it easier to do so. Data cleaning also improves the format of your data before it is imported into a statistical analysis program. We’ll show you how to use various spreadsheet tools to double-check your data quality and get preliminary summary statistics.</p></li>
+<li><p>In this lesson, we will assume that you are most likely using Excel as your primary spreadsheet program - there are others (gnumeric, Calc from OpenOffice), and their functionality is similar, but Excel seems to be the program most used by everyone.</p></li>
+</ul>
+</div>
+<div id="keeping-track-of-your-analyses" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Keeping track of your analyses<a href="data-organization-with-spreadsheet.html#keeping-track-of-your-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It’s very simple to end up with a spreadsheet that looks nothing like the one you started with when dealing with spreadsheets for data cleaning or analytics. If a reviewer or instructor requests a new analysis, you should be able to recreate your analyses or figure out what you performed.</p>
+<ul>
+<li>Make a new file containing the data you’ve cleaned or examined. If you change the original dataset, you’ll lose track of where you started!</li>
+<li>Keep a record of the steps you did to clean up or analyze your data. These stages should be tracked just like any other phase in an experiment. This should be done in a plain text file located in the same folder as the data file.</li>
+</ul>
+<div class="figure">
+<img src="image/spreadsheet-setup-updated.png" width="600" alt="" />
+<p class="caption">Keeping track of your analyses</p>
+</div>
+</div>
+<div id="structuring-data-in-spreadsheets" class="section level3 hasAnchor" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> Structuring data in spreadsheets<a href="data-organization-with-spreadsheet.html#structuring-data-in-spreadsheets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The cardinal rules of using spreadsheet programs for data:</p>
+<ol style="list-style-type: decimal">
+<li>Put all your variables in columns - the thing you’re measuring,
+like ‘weight’ or ‘temperature’.</li>
+<li>Put each observation in its own row.</li>
+<li>Don’t combine multiple pieces of information in one
+cell. Sometimes it just seems like one thing, but think if that’s
+the only way you’ll want to be able to use or sort that data.</li>
+<li>Leave the raw data raw - don’t change it!</li>
+<li>Export the cleaned data to a text-based format like CSV (comma-separated values) format. This
+ensures that anyone can use the data, and is required by
+most data repositories.</li>
+</ol>
+<p><strong>Exercise</strong>:</p>
+<p>What is the issue with the following data entry according to spreadsheet data structure rules above?</p>
+<div class="figure">
+<img src="fig/multiple-info.png" alt="" />
+<p class="caption">multiple-info example</p>
+</div>
+</div>
+<div id="columns-for-variables-and-rows-for-observations" class="section level3 hasAnchor" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> Columns for variables and rows for observations<a href="data-organization-with-spreadsheet.html#columns-for-variables-and-rows-for-observations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The rule of thumb, when setting up a datasheet, is columns =
+variables, rows = observations, cells = data (values).</p>
+<p>So, instead we should have:</p>
+<div class="figure">
+<img src="fig/single-info.png" alt="" />
+<p class="caption">single-info example</p>
+</div>
+</div>
+</div>
+<div id="common-spreadsheet-errors" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Common Spreadsheet Errors<a href="data-organization-with-spreadsheet.html#common-spreadsheet-errors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Don’t create multiple data tables within a single spreadsheet. This creates false associations between things for the computer, and makes it harder to sort and sort your data in the right order.
+<img src="fig/2_datasheet_example.jpg" width="600" alt="multiple tabs" />
+In the table below, each row in A-F represents four distinct samples. This means that the columns A-AF do not all refer to the same sample.</li>
+</ul>
+<div id="using-multiple-tabs" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Using multiple tabs<a href="data-organization-with-spreadsheet.html#using-multiple-tabs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>When you create extra tabs, you fail to allow the computer to see connections in the data that are there (you have to introduce spreadsheet application-specific functions or scripting).</li>
+</ul>
+</div>
+<div id="not-filling-in-zeros" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Not filling in zeros<a href="data-organization-with-spreadsheet.html#not-filling-in-zeros" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There’s a difference between a zero and a blank cell in a spreadsheet. To the computer, a zero is actually data. By not entering the value of an observation, you are telling your computer to represent that data as unknown(otherwise known as a null value). This can cause problems with subsequent calculations or analyses.</p>
+</div>
+<div id="using-problematic-null-values" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Using problematic null values<a href="data-organization-with-spreadsheet.html#using-problematic-null-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are a few reasons why null values get represented differently within a dataset. Sometimes confusing null values are automatically recorded from the measuring device. It’s a problem if unknown or missing data is recorded as -999, 999, or 0.</p>
+<p>Many statistical applications won’t detect them as missing (null) values. The tools you select to evaluate your data will determine how these values are interpreted. It is critical to utilize a null indicator that is clearly defined and consistent. As a result, Blanks (for most applications) and NA (for R) are excellent options.</p>
+</div>
+</div>
+<div id="date-as-data" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Date as data<a href="data-organization-with-spreadsheet.html#date-as-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>It is much safer to store dates with [MONTH, DAY and YEAR] in separate columns</p></li>
+<li><p>Excel is unable to parse dates from before 1899-12-31, and will thus leave these untouched.</p></li>
+<li><p>If you’re mixing historic data from before and after this date, Excel will translate only the post-1900 dates into its internal format</p></li>
+<li><p>Ideally, data should be as unambiguous as possible.</p></li>
+</ul>
+<div class="figure">
+<img src="fig/5_excel_dates_1.jpg" width="800" alt="" />
+<p class="caption">Many formats, many ambiguities</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-cleaning-with-openrefine.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mesfind/Proposal/edit/master/Chapter1.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Rmanual.pdf", "PDF"], ["Rmanual.epub", "EPUB"], ["Rmanual.docx", "Word"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Data Cleaning with OpenRefine | R Manual</title>
+  <meta name="description" content="R and Manul" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Data Cleaning with OpenRefine | R Manual" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/fig/MWULogo.jpeg" />
+  <meta property="og:description" content="R and Manul" />
+  <meta name="github-repo" content="Chapter 2 Data Cleaning with OpenRefine | R Manual" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Data Cleaning with OpenRefine | R Manual" />
+  
+  <meta name="twitter:description" content="R and Manul" />
+  <meta name="twitter:image" content="/fig/MWULogo.jpeg" />
+
+
+
+<meta name="date" content="2022-05-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-organization-with-spreadsheet.html"/>
+<link rel="next" href="data-analysis-with-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-information-and-conventions"><i class="fa fa-check"></i>Software information and conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html"><i class="fa fa-check"></i><b>1</b> Data Organization with Spreadsheet</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#spreadsheet-programs"><i class="fa fa-check"></i><b>1.1</b> Spreadsheet Programs</a></li>
+<li class="chapter" data-level="1.2" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#formatting-data-tables"><i class="fa fa-check"></i><b>1.2</b> Formatting data tables</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#problems-with-spreadsheets"><i class="fa fa-check"></i><b>1.2.1</b> Problems with Spreadsheets</a></li>
+<li class="chapter" data-level="1.2.2" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#use-of-spreadsheets-for-data-entery-and-cleaning"><i class="fa fa-check"></i><b>1.2.2</b> Use of Spreadsheets for Data Entery and Cleaning</a></li>
+<li class="chapter" data-level="1.2.3" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#keeping-track-of-your-analyses"><i class="fa fa-check"></i><b>1.2.3</b> Keeping track of your analyses</a></li>
+<li class="chapter" data-level="1.2.4" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#structuring-data-in-spreadsheets"><i class="fa fa-check"></i><b>1.2.4</b> Structuring data in spreadsheets</a></li>
+<li class="chapter" data-level="1.2.5" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#columns-for-variables-and-rows-for-observations"><i class="fa fa-check"></i><b>1.2.5</b> Columns for variables and rows for observations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#common-spreadsheet-errors"><i class="fa fa-check"></i><b>1.3</b> Common Spreadsheet Errors</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#using-multiple-tabs"><i class="fa fa-check"></i><b>1.3.1</b> Using multiple tabs</a></li>
+<li class="chapter" data-level="1.3.2" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#not-filling-in-zeros"><i class="fa fa-check"></i><b>1.3.2</b> Not filling in zeros</a></li>
+<li class="chapter" data-level="1.3.3" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#using-problematic-null-values"><i class="fa fa-check"></i><b>1.3.3</b> Using problematic null values</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#date-as-data"><i class="fa fa-check"></i><b>1.4</b> Date as data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning with OpenRefine</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#layout"><i class="fa fa-check"></i><b>2.1</b> Layout</a></li>
+<li class="chapter" data-level="2.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#records-and-rows"><i class="fa fa-check"></i><b>2.2</b> Records and Rows</a></li>
+<li class="chapter" data-level="2.3" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#changing-the-grid-view"><i class="fa fa-check"></i><b>2.3</b> Changing the Grid View</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#permanent-changes"><i class="fa fa-check"></i><b>2.3.1</b> Permanent Changes</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#non-permanent-changes"><i class="fa fa-check"></i><b>2.3.2</b> Non-Permanent Changes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-mining-and-discovery"><i class="fa fa-check"></i><b>2.4</b> Data Mining and Discovery</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#reordering-columns"><i class="fa fa-check"></i><b>2.4.1</b> Reordering Columns</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#sorting-data"><i class="fa fa-check"></i><b>2.4.2</b> Sorting Data</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#text-based-discovery"><i class="fa fa-check"></i><b>2.4.3</b> Text Based Discovery</a></li>
+<li class="chapter" data-level="2.4.4" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#number-and-data-based-discovery"><i class="fa fa-check"></i><b>2.4.4</b> Number and Data Based Discovery</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-preparation-and-normalization"><i class="fa fa-check"></i><b>2.5</b> Data Preparation and Normalization</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#common-transformations"><i class="fa fa-check"></i><b>2.5.1</b> Common Transformations</a></li>
+<li class="chapter" data-level="2.5.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#removing-duplicates"><i class="fa fa-check"></i><b>2.5.2</b> Removing Duplicates</a></li>
+<li class="chapter" data-level="2.5.3" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#splitting-cell-values"><i class="fa fa-check"></i><b>2.5.3</b> Splitting Cell Values</a></li>
+<li class="chapter" data-level="2.5.4" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#combining-cell-values"><i class="fa fa-check"></i><b>2.5.4</b> Combining cell Values</a></li>
+<li class="chapter" data-level="2.5.5" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-shaping"><i class="fa fa-check"></i><b>2.5.5</b> Data Shaping</a></li>
+<li class="chapter" data-level="2.5.6" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#clustering"><i class="fa fa-check"></i><b>2.5.6</b> Clustering</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html"><i class="fa fa-check"></i><b>3</b> Data Analysis with R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#what-is-r-what-is-rstudio"><i class="fa fa-check"></i><b>3.1</b> What is R? What is RStudio?</a></li>
+<li class="chapter" data-level="3.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#why-learn-r"><i class="fa fa-check"></i><b>3.2</b> Why learn R?</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-does-not-involve-lots-of-pointing-and-clicking-and-thats-a-good-thing"><i class="fa fa-check"></i><b>3.2.1</b> R does not involve lots of pointing and clicking, and that’s a good thing</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-code-is-great-for-reproducibility"><i class="fa fa-check"></i><b>3.2.2</b> R code is great for reproducibility</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-is-interdisciplinary-and-extensible"><i class="fa fa-check"></i><b>3.2.3</b> R is interdisciplinary and extensible</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-works-on-data-of-all-shapes-and-sizes"><i class="fa fa-check"></i><b>3.2.4</b> R works on data of all shapes and sizes</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-produces-high-quality-graphics"><i class="fa fa-check"></i><b>3.2.5</b> R produces high-quality graphics</a></li>
+<li class="chapter" data-level="3.2.6" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-has-a-large-and-welcoming-community"><i class="fa fa-check"></i><b>3.2.6</b> R has a large and welcoming community</a></li>
+<li class="chapter" data-level="3.2.7" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#not-only-is-r-free-but-it-is-also-open-source-and-cross-platform"><i class="fa fa-check"></i><b>3.2.7</b> Not only is R free, but it is also open-source and cross-platform</a></li>
+<li class="chapter" data-level="3.2.8" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#knowing-your-way-around-rstudio"><i class="fa fa-check"></i><b>3.2.8</b> Knowing your way around RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#introduction-to-r"><i class="fa fa-check"></i><b>3.3</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#comments"><i class="fa fa-check"></i><b>3.3.1</b> Comments</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#functions-and-their-arguments"><i class="fa fa-check"></i><b>3.3.2</b> Functions and their arguments</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#data-structure"><i class="fa fa-check"></i><b>3.3.3</b> Data Structure</a></li>
+<li class="chapter" data-level="3.3.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3.4</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="3.3.5" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#conditional-subsetting"><i class="fa fa-check"></i><b>3.3.5</b> Conditional subsetting</a></li>
+<li class="chapter" data-level="3.3.6" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#missing-data"><i class="fa fa-check"></i><b>3.3.6</b> Missing Data</a></li>
+<li class="chapter" data-level="3.3.7" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#matrices"><i class="fa fa-check"></i><b>3.3.7</b> Matrices</a></li>
+<li class="chapter" data-level="3.3.8" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#data-frames"><i class="fa fa-check"></i><b>3.3.8</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#starting-with-data"><i class="fa fa-check"></i><b>3.4</b> Starting with data</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#inspecting-data-frame-objects"><i class="fa fa-check"></i><b>3.4.1</b> Inspecting Data Frame Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#indexing-and-subsetting-data-frames"><i class="fa fa-check"></i><b>3.5</b> Indexing and subsetting data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#factors-1"><i class="fa fa-check"></i><b>3.6</b> Factors</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#converting-factors"><i class="fa fa-check"></i><b>3.6.1</b> Converting factors</a></li>
+<li class="chapter" data-level="3.6.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#renaming-factors"><i class="fa fa-check"></i><b>3.6.2</b> Renaming factors</a></li>
+<li class="chapter" data-level="3.6.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#using-stringsasfactorsfalse"><i class="fa fa-check"></i><b>3.6.3</b> Using <code>stringsAsFactors=FALSE</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#formatting-dates"><i class="fa fa-check"></i><b>3.7</b> Formatting Dates</a></li>
+<li class="chapter" data-level="3.8" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#manipulating-and-analyzing-data-with-tidyverse"><i class="fa fa-check"></i><b>3.8</b> manipulating and analyzing data with tidyverse</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#data-manipulation-using-dplyr-and-tidyr"><i class="fa fa-check"></i><b>3.8.1</b> Data Manipulation using <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>3.9</b> Exploratory data analysis</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#statistical-variables-and-data"><i class="fa fa-check"></i><b>3.9.1</b> Statistical variables and data</a></li>
+<li class="chapter" data-level="3.9.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#understanding-numerical-variables"><i class="fa fa-check"></i><b>3.9.2</b> Understanding numerical variables</a></li>
+<li class="chapter" data-level="3.9.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#understanding-categorical-variables"><i class="fa fa-check"></i><b>3.9.3</b> Understanding categorical variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#regression-with-r"><i class="fa fa-check"></i><b>3.10</b> Regression with R</a>
+<ul>
+<li class="chapter" data-level="3.10.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#hypotheses-and-null-hypotheses"><i class="fa fa-check"></i><b>3.10.1</b> Hypotheses and null hypotheses</a></li>
+<li class="chapter" data-level="3.10.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#linear-regression"><i class="fa fa-check"></i><b>3.10.2</b> Linear Regression</a></li>
+<li class="chapter" data-level="3.10.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#generalized-linear-modelglm"><i class="fa fa-check"></i><b>3.10.3</b> Generalized Linear Model(GLM)</a></li>
+<li class="chapter" data-level="3.10.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#logistic-regression"><i class="fa fa-check"></i><b>3.10.4</b> Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#anova-with-r"><i class="fa fa-check"></i><b>3.11</b> Anova with R</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html"><i class="fa fa-check"></i><b>4</b> Data Visualization with R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#basics-of-ggplot2"><i class="fa fa-check"></i><b>4.1</b> Basics of ggplot2</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#importing-data"><i class="fa fa-check"></i><b>4.1.1</b> Importing data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#scatter-plot"><i class="fa fa-check"></i><b>4.1.2</b> Scatter plot</a></li>
+<li class="chapter" data-level="4.1.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#bar-plot"><i class="fa fa-check"></i><b>4.1.3</b> Bar Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#boxplots"><i class="fa fa-check"></i><b>4.2</b> Boxplots</a></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#plotting-time-series-data"><i class="fa fa-check"></i><b>4.3</b> Plotting time series data</a></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#line-plot"><i class="fa fa-check"></i><b>4.4</b> Line Plot</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#histograpm"><i class="fa fa-check"></i><b>4.5</b> Histograpm</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#map"><i class="fa fa-check"></i><b>4.6</b> Map</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#map-color"><i class="fa fa-check"></i><b>4.6.1</b> Map color</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html"><i class="fa fa-check"></i><b>5</b> Manuscript Preparation with RMarkdown in R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#publishing-with-r-markdown"><i class="fa fa-check"></i><b>5.1</b> Publishing with R Markdown</a></li>
+<li class="chapter" data-level="5.2" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#r-markdown-syntax"><i class="fa fa-check"></i><b>5.2</b> R Markdown Syntax</a></li>
+<li class="chapter" data-level="5.3" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#rendering-output"><i class="fa fa-check"></i><b>5.3</b> Rendering output</a></li>
+<li class="chapter" data-level="5.4" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#how-it-works"><i class="fa fa-check"></i><b>5.4</b> How it works</a></li>
+<li class="chapter" data-level="5.5" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#code-chunks"><i class="fa fa-check"></i><b>5.5</b> Code Chunks</a></li>
+<li class="chapter" data-level="5.6" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#inline-code"><i class="fa fa-check"></i><b>5.6</b> Inline Code</a></li>
+<li class="chapter" data-level="5.7" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#code-languages"><i class="fa fa-check"></i><b>5.7</b> Code Languages</a></li>
+<li class="chapter" data-level="5.8" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#academic-journals"><i class="fa fa-check"></i><b>5.8</b> Academic Journals</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#get-started"><i class="fa fa-check"></i><b>5.8.1</b> Get started</a></li>
+<li class="chapter" data-level="5.8.2" data-path="manuscript-preparation-with-rmarkdown-in-r.html"><a href="manuscript-preparation-with-rmarkdown-in-r.html#rticles-templates"><i class="fa fa-check"></i><b>5.8.2</b> rticles templates</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="" data-path="appendex-1.html"><a href="appendex-1.html"><i class="fa fa-check"></i>Appendex 1</a>
+<ul>
+<li class="chapter" data-level="9" data-path="appendex-1.html"><a href="appendex-1.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>9</b> Installing R and Rstudio</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="appendex-1.html"><a href="appendex-1.html#installing-r"><i class="fa fa-check"></i><b>9.1</b> installing R</a></li>
+<li class="chapter" data-level="9.2" data-path="appendex-1.html"><a href="appendex-1.html#installing-rstudio"><i class="fa fa-check"></i><b>9.2</b> Installing RStudio</a></li>
+<li class="chapter" data-level="9.3" data-path="appendex-1.html"><a href="appendex-1.html#open-rstudio"><i class="fa fa-check"></i><b>9.3</b> Open RStudio</a></li>
+<li class="chapter" data-level="9.4" data-path="appendex-1.html"><a href="appendex-1.html#installing-r-packages"><i class="fa fa-check"></i><b>9.4</b> Installing R packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://mesfind.github.io" target="blank">&copy Mesfin Diro</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Data analysis and Visualization<br />
+<br />
+Participant Manual<br />
+<br />
+<img src="fig/MWULogo.jpeg" style="width:1.2in" /></div></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-cleaning-with-openrefine" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Data Cleaning with OpenRefine<a href="data-cleaning-with-openrefine.html#data-cleaning-with-openrefine" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Cleaning data is required before it can be analyzed. To provide consistent data, data cleaning identifies mistakes and corrects formatting. This procedure must be done with extreme caution since without clean data, analysis results may be inaccurate and non-reproducible.</p>
+<p>OpenRefine is a robust free and open source tool for dealing with untidy data, such as cleaning it and converting it to a different format.</p>
+<p>This course will show you how to use OpenRefine to successfully clean and format data while keeping track of any changes you make. Many users say that using this program saves them months of time compared to doing these modifications by hand.</p>
+<div id="layout" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Layout<a href="data-cleaning-with-openrefine.html#layout" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Once you have imported your data, it is important to familiarize yourself with OpenRefine’s layout.</p>
+<ol style="list-style-type: decimal">
+<li>In the top right corner there are three buttons:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>“Open…” returns you to the home screen where you can select projects.</li>
+<li>“Export” opens a dropdown menu of options to export your data.</li>
+<li>“Help” opens the OpenRefine User Documentation in a new tab in your browser.</li>
+</ol>
+<p><img src="image/4.png" width="600" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Below the bolded header stating how many rows/records there are two options:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>“Show as” allows you to change the grid view between rows and records. For more information on the difference between rows and records, see the explanation of Records and Rows below.</li>
+<li>“Show” allows you to change the number of rows/records visible in the grid view.</li>
+</ol>
+<p><img src="image/5.png" width="600" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>In the center of the page is your data in the grid view, which looks similar to Excel. Features of the grid view include:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>Column headings with dropdown arrows for chosing functions</li>
+<li>Row/Record numbers and alternate row/record shading</li>
+<li>Selectable flags and stars</li>
+</ol>
+<p><img src="image/6.png" width="600" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>On the left, there is a pane with two tabs:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>b”Facet/Filter” allows you to work on selected sections of your data, including faceting, clustering, and filtering.</li>
+<li>“Undo/Redo” tracks and stores your history, allows you to undo or redo transformations, and export a JSON file of your transformations.</li>
+</ol>
+</div>
+<div id="records-and-rows" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Records and Rows<a href="data-cleaning-with-openrefine.html#records-and-rows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are two settings for the grid view in OpenRefine: rows or records.</p>
+<p>The difference between rows and records is that “rows” display your data in individual lines, each numbered separately, while “records” display your data in multi-line groupings depending on the relationships between the data in those lines. For example:</p>
+<p><img src="image/8.png" width="600" /></p>
+<p>This data has been transformed using “split multi-valued cells” on the author field to separate different authors into their own lines. On the left, the data is displayed as “records,” showing the different lines with the multiple authors grouped together. On the right, the data is displayed as “rows,” showing each of the multiple authors as a separate line.</p>
+<p>NOTE: Take caution when permanently renumbering rows or records and be aware of what setting you are viewing your data under.</p>
+</div>
+<div id="changing-the-grid-view" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Changing the Grid View<a href="data-cleaning-with-openrefine.html#changing-the-grid-view" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You can adjust the grid display in numerous ways to make it easier to compare, analyse, and associate data columns. Some adjustments can be permanent or non-permanent, and they can help you organize your data better overall.</p>
+<div id="permanent-changes" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Permanent Changes<a href="data-cleaning-with-openrefine.html#permanent-changes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Rearranging columns, eliminating columns, and/or renaming columns are all permanent modifications to the grid view.</p>
+<p>Although the instructions in Reordering Columns can be used to reorder and remove columns, this method produces the same effects for modest, rapid changes.</p>
+<ol style="list-style-type: decimal">
+<li>Go to the column you would like to rearrange or remove and click the arrow button on the column header.</li>
+<li>Select the “Edit columns” option and choose the option that best fits from the dropdown:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>Remove this column</li>
+<li>Move column to beginning</li>
+<li>Move column to end</li>
+<li>Move column left</li>
+<li>Move column right</li>
+</ol>
+<p><img src="image/9.png" width="600" /></p>
+<p>Changes to the column name can be done in a few simple steps:</p>
+<ol style="list-style-type: decimal">
+<li>Go to the column you would like to rename and click the arrow button on the column header.</li>
+<li>Select the “Edit columns” option and click on “Rename this column.”</li>
+<li>Change the column name in the pop-up window and click “OK.”</li>
+</ol>
+<p><img src="image/10.png" width="600" /></p>
+<p>NOTE: In your tracked history, changes to column order or name, as well as the removal of columns, are logged as transformations. Follow the instructions in History and Undo/Redo to undo moving a column.</p>
+</div>
+<div id="non-permanent-changes" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Non-Permanent Changes<a href="data-cleaning-with-openrefine.html#non-permanent-changes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Collapsing columns in one of four ways is a non-permanent alteration to the grid view: collapsing the current column, all other columns, all columns to the left of the current column, or all columns to the right of the current column.</p>
+<ol style="list-style-type: decimal">
+<li>Go to the column you would like to change and click the arrow button on the column header.</li>
+<li>Select the “View” option and pick the best option from the dropdown:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>Collapse this column</li>
+<li>Collapse all other columns</li>
+<li>Collapse all columns to left (see second image below)</li>
+<li>Collapse all columns to right</li>
+</ol>
+<p><img src="image/11.png" width="600" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>The collapsed column(s) are replaced by a narrow placeholder.</li>
+<li>To reopen collapsed columns, click on the placeholder.</li>
+</ol>
+<p><img src="image/12.png" width="600" /></p>
+<p>NOTE: Collapsing columns does not permanently delete columns from your data, it only hides the selected columns from view. To permanently delete columns, follow the instructions in Reordering Columns.</p>
+</div>
+</div>
+<div id="data-mining-and-discovery" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Data Mining and Discovery<a href="data-cleaning-with-openrefine.html#data-mining-and-discovery" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>OpenRefine includes a number of tools that allow you to quickly search, organize, and contextualize your data without having to go through it manually. Facets and filters based on data type (text, numeric, or date) can be used to sort, arrange, and contextualize your data for better discovery and analysis while maintaining the data’s original structure.</p>
+<ul>
+<li>Reordering columns Reorder your columns for better contextualization or to prepare for further transformations.</li>
+<li>Sorting Data Arrange your data according to defined order within one or more columns.</li>
+<li>Text Based Discovery Search, narrow, and isolate data based on textual information.</li>
+<li>Number and Date Based Discovery Search, narrow, and isolate data based on numeric and date information.</li>
+</ul>
+<div id="reordering-columns" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Reordering Columns<a href="data-cleaning-with-openrefine.html#reordering-columns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>OpenRefine allows you to reorder your columns for better contextualization or to prepare for further transformations of your data. To reorder columns:</p>
+<ol style="list-style-type: decimal">
+<li>Go to the first column, labeled “All,” and click the arrow button on the column header.</li>
+<li>Select the option “Edit columns” and then choose “Re-order/remove columns.”</li>
+<li>In the pop-up window, click and drag the column titles into the order in which you would like them to be displayed or drag them to the far right to remove the columns.</li>
+</ol>
+<p><img src="image/13.png" width="600" /></p>
+<p>Helpful Tips:</p>
+<p>Reordering columns can be useful when preparing to combine column data or to rearrange columns after splitting column data</p>
+</div>
+<div id="sorting-data" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Sorting Data<a href="data-cleaning-with-openrefine.html#sorting-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>OpenRefine has a “Sort” feature that works similarly to Excel’s sorting. This function allows you to arrange your data in one or more columns in a certain order.
+#### Sorting by One Column 1.</p>
+<ol style="list-style-type: decimal">
+<li>Go to the column you would like to sort by and click the arrow button on the column header.</li>
+<li>Select the “Sort” option.</li>
+<li>In the pop-up window, select the criteria and order you wish to sort by and select “Ok.”</li>
+<li>The order of rows/records will change in the grid view according to your selections</li>
+</ol>
+<p><img src="image/13.png" width="600" /></p>
+<p>Helpful Tips:</p>
+<ul>
+<li>The “Sort” function does not permanently change the order of your rows/records, only the order you view them in. This can be checked by looking at the row/record numbers at the left of the grid view.</li>
+<li>The order of your rows/records can be permanently changed by selecting “Sort” at the top of the grid view and choosing “Reorder rows permanently.”</li>
+<li>The “Sort” function can be removed by selecting “Sort” at the top of the grid view and choosing “Remove sort.”</li>
+</ul>
+<div id="sorting-by-multiple-columns" class="section level4 hasAnchor" number="2.4.2.1">
+<h4><span class="header-section-number">2.4.2.1</span> Sorting by Multiple Columns<a href="data-cleaning-with-openrefine.html#sorting-by-multiple-columns" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Follow steps 1-4 above for your first sort.</li>
+<li>Do not remove the first sort, but choose your second column and repeat steps 1-2.</li>
+<li>In the pop-up window DO NOT select the “Sort by this column alone” option and select “Ok.”</li>
+<li>The order of rows/columns will change in the grid view according to your first sort and then within that, according to the second sort</li>
+</ol>
+<p><img src="image/14.png" width="600" /> Helpful Tips:</p>
+<ul>
+<li>If you have applied multiple sorts, you can remove each one individually or as a group. This can be done by selecting “Sort” at the top of the grid view, hovering over the sort title you wish to remove, and selecting “Remove sort.”</li>
+</ul>
+<p><img src="image/16.png" width="600" /></p>
+</div>
+</div>
+<div id="text-based-discovery" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Text Based Discovery<a href="data-cleaning-with-openrefine.html#text-based-discovery" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="text-facet" class="section level4 hasAnchor" number="2.4.3.1">
+<h4><span class="header-section-number">2.4.3.1</span> Text Facet<a href="data-cleaning-with-openrefine.html#text-facet" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><p>Faceting allows you to quickly view unique values in a column, make edits to those values, and narrow your display to show results containing a specific facet.</p></li>
+<li><p>To display facets:</p>
+<ol style="list-style-type: decimal">
+<li>Go to the column you would like to analyze and click the arrow button on the column header.</li>
+<li>Choose “Facet” from the drop-down menu, and then select “Text facet.”</li>
+<li>A facet window will appear in the pane to the left side of the grid view.</li>
+</ol></li>
+</ul>
+<p><img src="image/16.png" width="600" /></p>
+</div>
+<div id="text-filter" class="section level4 hasAnchor" number="2.4.3.2">
+<h4><span class="header-section-number">2.4.3.2</span> Text Filter<a href="data-cleaning-with-openrefine.html#text-filter" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><p>The text filter option works like the “Find” function in Excel, allowing you to search a column for values containing a specific string.</p></li>
+<li><p>To display the text filter function:</p>
+<ol style="list-style-type: decimal">
+<li>Go to the column you would like to search and click the arrow button on the column header.</li>
+<li>Choose “Text filter.”</li>
+<li>A window with a search box will appear in the pane to the left side of the grid view.</li>
+</ol></li>
+</ul>
+<p><img src="image/18.png" width="600" /></p>
+</div>
+</div>
+<div id="number-and-data-based-discovery" class="section level3 hasAnchor" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> Number and Data Based Discovery<a href="data-cleaning-with-openrefine.html#number-and-data-based-discovery" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="changing-the-cell-format" class="section level4 hasAnchor" number="2.4.4.1">
+<h4><span class="header-section-number">2.4.4.1</span> Changing the Cell Format<a href="data-cleaning-with-openrefine.html#changing-the-cell-format" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>When you import a project into <code>OpenRefine</code>, the cells will automatically be given a format: text, number, or date. To change this format:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Go to the column you would like to change the format of and click the arrow button on the column header.</li>
+<li>Choose “Edit cells” and then select “Common transformations.”</li>
+<li>Under “Common transformation,” choose the desired format.</li>
+</ol>
+<p><strong>Helpful Tips:</strong></p>
+<p>-Columns with values in green are either in date or number format. This makes it easier to identify what types of facets and filters you can use.</p>
+</div>
+<div id="numeric-facet" class="section level4 hasAnchor" number="2.4.4.2">
+<h4><span class="header-section-number">2.4.4.2</span> Numeric Facet<a href="data-cleaning-with-openrefine.html#numeric-facet" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>The Numeric Facet allows you to sort columns with numeric values and to use a sliding scale to adjust the range of number values displayed in the grid view. To display this facet:</li>
+</ul>
+<p>1.Go to the column you would like to facet and click the arrow button on the column header.
+2. Choose “Facet” and then select “Numeric facet.”
+3. A window with a sliding scale will appear in the pane to the left side of the grid view.</p>
+<p><img src="image/21.png" width="600" /></p>
+<p><strong>Helpful Tips:</strong></p>
+<ul>
+<li>The “Numeric Facet” function is useful for narrowing data to exclude outlying numeric values.</li>
+<li>This function can also be used to isolate high or low values.</li>
+</ul>
+</div>
+<div id="timeline-facet" class="section level4 hasAnchor" number="2.4.4.3">
+<h4><span class="header-section-number">2.4.4.3</span> Timeline Facet<a href="data-cleaning-with-openrefine.html#timeline-facet" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>The Timeline Facet allows you to sort columns with date values and to use a sliding scale to adjust the range of date values to displayed in the grid view. To display this facet:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Go to the column you would like to facet and click the arrow button on the column header.</li>
+<li>If the data is not read as “dates”, it needs to covert this column to dates. See the explanation of Common transformations.</li>
+<li>Choose “Facet” and then select “Timeline facet.”</li>
+<li>A window with a sliding scale will appear in the pane to the left side of the grid view.</li>
+</ol>
+<p><img src="image/22.png" width="600" /></p>
+<p><strong>Helpful Tips:</strong></p>
+<p>The “Timeline facet” function is useful for narrowing data to exclude outlying date values.
+This function can also be used to isolate specific dates, times, or date ranges.</p>
+</div>
+</div>
+</div>
+<div id="data-preparation-and-normalization" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Data Preparation and Normalization<a href="data-cleaning-with-openrefine.html#data-preparation-and-normalization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="common-transformations" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Common Transformations<a href="data-cleaning-with-openrefine.html#common-transformations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>OpenRefine has a number of functions for performing typical data transformations. Many of these changes are for data cleansing and may be done with regular expressions as well. To locate these transformations:</p>
+<ol style="list-style-type: decimal">
+<li>Go to the column you would like to make edits to and click the arrow button on the column header.</li>
+<li>Select the “Edit cells” and then “Common transforms” options.</li>
+</ol>
+<p><img src="image/24.png" width="600" /></p>
+</div>
+<div id="removing-duplicates" class="section level3 hasAnchor" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> Removing Duplicates<a href="data-cleaning-with-openrefine.html#removing-duplicates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Your data may contain duplicate information that should be removed from the dataset.</p>
+<p>NOTE: For optimal results, make sure you’re in ROW mode.</p>
+<ol style="list-style-type: decimal">
+<li>Sort the column with duplicates using the sort function. See the Sorting Data section for sorting instructions.</li>
+<li>Choose “Sort” and then “reorder rows permanently” after you’ve sorted the column.</li>
+<li>Select the duplicates column and click the arrow button in the column header.</li>
+<li>Select “Edit cells” followed by “Blank down.”</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>If two rows succeeding each other have the identical information, “Blank down” will detect it. If they do, the cell values in the second row will be eliminated and the second row will be “blanked out.”</li>
+</ol>
+<p><img src="image/51.png" width="600" /></p>
+<ol start="5" style="list-style-type: decimal">
+<li>After you have used the “Blank down” function, use the “Facet by blank” to identify rows with blank cell values for that column.</li>
+<li>From the facet window, select the “true” option.</li>
+<li>Go to the column labeled “All” and click on the arrow button, then select “Edit rows” and choose “Remove all matching rows.”</li>
+<li>All rows with the identified duplicates will be removed. To restore the full data view, simply reset the facets</li>
+</ol>
+<p><img src="image/27.png" width="600" /></p>
+<p>Helpful Tips:</p>
+<ul>
+<li>It is important to make sure that all cells in the column you are applying this transformation to have values. If there are cells that were originally blank before applying the “Blank down” function, they will be deleted along with the duplicate rows.</li>
+<li>It is important to be aware that the entire row of values will be deleted along with the duplicate value in a given column. Be careful and check before deleting rows or applying the “Blank down” function to make sure that data meant to be kept is not accidentally deleted.</li>
+</ul>
+</div>
+<div id="splitting-cell-values" class="section level3 hasAnchor" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> Splitting Cell Values<a href="data-cleaning-with-openrefine.html#splitting-cell-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You can come across columns that have a lot of data clumped together. OpenRefine has numerous options for separating these pieces of data into more meaningful divisions, such creating new columns or creating a multi-row record.</p>
+<div id="creating-a-new-row-based-on-a-separator" class="section level4 hasAnchor" number="2.5.3.1">
+<h4><span class="header-section-number">2.5.3.1</span> Creating a New Row Based on a Separator<a href="data-cleaning-with-openrefine.html#creating-a-new-row-based-on-a-separator" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>NOTE: Before starting this process, make sure to reset all facets on the column you want to work with.</p>
+<ol style="list-style-type: decimal">
+<li>Click the arrow button on the column header next to the column you want to split.</li>
+<li>Choose “Split multi-valued cells” from the “Edit cells” menu.</li>
+<li>Type the separator (usually a semicolon, comma, or other special character) in the pop-up window and click “OK.”</li>
+<li>Cells having separator values will be divided into different rows according to those separators.</li>
+</ol>
+<p>Note: The new rows will be part of the same record as before. See the Layout section for further information on rows and records.</p>
+<p><img src="image/28.png" width="600" /></p>
+</div>
+<div id="creating-a-new-column-based-on-a-separator-or-field-length" class="section level4 hasAnchor" number="2.5.3.2">
+<h4><span class="header-section-number">2.5.3.2</span> Creating a New Column Based on a Separator or Field Length<a href="data-cleaning-with-openrefine.html#creating-a-new-column-based-on-a-separator-or-field-length" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Go to the column you would like to split and click the arrow button on the column header.</li>
+<li>Select the “Edit column” option and choose “Split into several columns.”</li>
+<li>In the pop-up window, select the method by which you would like to split the column:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>“By separator” allows you to input the separator value (often a semi-colon, comma, or other special character) as well as to limit the number of additional columns are created.</li>
+<li>“By field lengths” allows you to input a string of integers to indicate where in the original column value you would like OpenRefine to split the values. For example: i. A column contains dates in the YYYY/MM/DD format. You wish to divide this into three columns (Year, Month, Day). Under “by field lengths,” use the list “4, 1, 2, 1, 2” indicating “year, slash, month, slash, day.” The result will be five columns, two with only slashes which you can remove, and three with the Year, Month, and Day respectively.</li>
+</ol>
+<!-- -->
+<ol start="4" style="list-style-type: decimal">
+<li>When you have selected and identified all your criteria, select “OK.”</li>
+</ol>
+<p><img src="image/30.png" width="600" /></p>
+<p>Helpful Tips:</p>
+<ul>
+<li><p>The new columns will be named after the original column from which they were built. You can change the column titles by going to the column header, clicking the arrow button, selecting “Edit column,” and then selecting “Rename this column.”</p></li>
+<li><p>This transformation is useful for splitting data into manageable chunks for analysis. Information such as addresses, dates, and people could be included.</p></li>
+</ul>
+</div>
+</div>
+<div id="combining-cell-values" class="section level3 hasAnchor" number="2.5.4">
+<h3><span class="header-section-number">2.5.4</span> Combining cell Values<a href="data-cleaning-with-openrefine.html#combining-cell-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In OpenRefine 3.3, you can merge data from different columns. You can use this technique to combine the contents of two columns, add a certain string or characters to the values of a column, or do both. There are various methods for combining data from different columns. Introduce two fundamental functions for combining data:</p>
+<ul>
+<li>Joining columns</li>
+<li>Concatenation</li>
+</ul>
+</div>
+<div id="data-shaping" class="section level3 hasAnchor" number="2.5.5">
+<h3><span class="header-section-number">2.5.5</span> Data Shaping<a href="data-cleaning-with-openrefine.html#data-shaping" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>OpenRefine has functions that allow you to reshape your data by transposing information between rows and columns in order to see it in a new way.</p>
+<div id="rows-into-columns" class="section level4 hasAnchor" number="2.5.5.1">
+<h4><span class="header-section-number">2.5.5.1</span> Rows into Columns<a href="data-cleaning-with-openrefine.html#rows-into-columns" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To transpose rows into columns:</p>
+<ol style="list-style-type: decimal">
+<li>Go to the column with the data you would like to separate into different columns.</li>
+<li>Click the arrow button in the column header and select “Transpose.”</li>
+<li>Select “Transpose cells in rows into columns</li>
+</ol>
+<p><img src="image/32.png" width="600" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>In the pop-up window, enter the number of rows you would like to transpose and click OK. NOTE: If you enter “2,” OpenRefine will create two columns, pulling cell values from rows in sets of two. For example: (Row 1, Column A) and (Row 2, Column A) will become (Row 1, Column A) and (Row 1, Column B) respectively.</li>
+</ol>
+<p><img src="image/34.png" width="600" /> 5. Click “Transpose.”</p>
+<p><img src="image/36.png" width="600" /> Helpful Tips:</p>
+<ul>
+<li>If there are specific columns you would like to transpose into rows, consider moving them next to each other by following the instructions for Reordering Columns.</li>
+<li>Since transposing columns to rows does not preserve record associations (see Records and Rows), make sure you have a unique identifier column not being included in the transformation. This way, when you select “Fill down in other columns.” the unique identifier can be used to associate related data.</li>
+<li>All transformations of columns into rows are tracked in the Undo/Redo tab, so you can experiment with transposing columns into rows until you are comfortable with the result.</li>
+</ul>
+</div>
+</div>
+<div id="clustering" class="section level3 hasAnchor" number="2.5.6">
+<h3><span class="header-section-number">2.5.6</span> Clustering<a href="data-cleaning-with-openrefine.html#clustering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-organization-with-spreadsheet.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-analysis-with-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mesfind/Proposal/edit/master/Chapter2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Rmanual.pdf", "PDF"], ["Rmanual.epub", "EPUB"], ["Rmanual.docx", "Word"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
