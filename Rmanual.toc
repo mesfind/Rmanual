@@ -1,0 +1,141 @@
+\babel@toc {english}{}\relax 
+\contentsline {fm}{Preface}{}{chapter*.1}%
+\contentsline {part}{I\hspace {1em}Part 1}{1}{part.1}%
+\contentsline {chapter}{\numberline {1}Data Organization with Spreadsheet}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Spreadsheet Programs}{2}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Formatting data tables}{3}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Problems with Spreadsheets}{4}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Use of Spreadsheets for Data Entery and Cleaning}{4}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Keeping track of your analyses}{4}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Structuring data in spreadsheets}{5}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Columns for variables and rows for observations}{5}{subsection.1.2.5}%
+\contentsline {section}{\numberline {1.3}Common Spreadsheet Errors}{6}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Using multiple tabs}{8}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Not filling in zeros}{8}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Using problematic null values}{8}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Date as data}{8}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Data Cleaning with OpenRefine}{10}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Layout}{10}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Records and Rows}{12}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Changing the Grid View}{13}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Permanent Changes}{13}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Non-Permanent Changes}{16}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Data Mining and Discovery}{18}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Reordering Columns}{19}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Sorting Data}{20}{subsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.2.1}Sorting by Multiple Columns}{21}{subsubsection.2.4.2.1}%
+\contentsline {subsection}{\numberline {2.4.3}Text Based Discovery}{22}{subsection.2.4.3}%
+\contentsline {subsubsection}{\numberline {2.4.3.1}Text Facet}{22}{subsubsection.2.4.3.1}%
+\contentsline {subsubsection}{\numberline {2.4.3.2}Text Filter}{22}{subsubsection.2.4.3.2}%
+\contentsline {subsection}{\numberline {2.4.4}Number and Data Based Discovery}{23}{subsection.2.4.4}%
+\contentsline {subsubsection}{\numberline {2.4.4.1}Changing the Cell Format}{23}{subsubsection.2.4.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.4.2}Numeric Facet}{23}{subsubsection.2.4.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.4.3}Timeline Facet}{24}{subsubsection.2.4.4.3}%
+\contentsline {section}{\numberline {2.5}Data Preparation and Normalization}{25}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Common Transformations}{25}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Removing Duplicates}{26}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Splitting Cell Values}{28}{subsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.3.1}Creating a New Row Based on a Separator}{28}{subsubsection.2.5.3.1}%
+\contentsline {subsubsection}{\numberline {2.5.3.2}Creating a New Column Based on a Separator or Field Length}{29}{subsubsection.2.5.3.2}%
+\contentsline {subsection}{\numberline {2.5.4}Combining cell Values}{30}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.5.5}Data Shaping}{31}{subsection.2.5.5}%
+\contentsline {subsubsection}{\numberline {2.5.5.1}Rows into Columns}{31}{subsubsection.2.5.5.1}%
+\contentsline {subsection}{\numberline {2.5.6}Clustering}{34}{subsection.2.5.6}%
+\contentsline {chapter}{\numberline {3}Data Analysis with R}{35}{chapter.3}%
+\contentsline {section}{\numberline {3.1}What is R? What is RStudio?}{35}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Why learn R?}{35}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}R does not involve lots of pointing and clicking, and that's a good thing}{35}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}R code is great for reproducibility}{36}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}R is interdisciplinary and extensible}{36}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}R works on data of all shapes and sizes}{36}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}R produces high-quality graphics}{36}{subsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.2.6}R has a large and welcoming community}{37}{subsection.3.2.6}%
+\contentsline {subsection}{\numberline {3.2.7}Not only is R free, but it is also open-source and cross-platform}{37}{subsection.3.2.7}%
+\contentsline {subsection}{\numberline {3.2.8}Knowing your way around RStudio}{37}{subsection.3.2.8}%
+\contentsline {section}{\numberline {3.3}Introduction to R}{38}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Comments}{39}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Functions and their arguments}{40}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Data Structure}{41}{subsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.3.1}Vectors}{41}{subsubsection.3.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.4}Subsetting vectors}{44}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Conditional subsetting}{45}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.6}Missing Data}{46}{subsection.3.3.6}%
+\contentsline {subsubsection}{\numberline {3.3.6.1}Factors}{47}{subsubsection.3.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.3.6.2}Logicals}{49}{subsubsection.3.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.3.6.3}Numeric and Integer}{50}{subsubsection.3.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.3.6.4}Dates}{51}{subsubsection.3.3.6.4}%
+\contentsline {subsection}{\numberline {3.3.7}Matrices}{52}{subsection.3.3.7}%
+\contentsline {subsubsection}{\numberline {3.3.7.1}Creating a matrix}{53}{subsubsection.3.3.7.1}%
+\contentsline {subsection}{\numberline {3.3.8}Data Frames}{54}{subsection.3.3.8}%
+\contentsline {subsubsection}{\numberline {3.3.8.1}Creating a data frame}{55}{subsubsection.3.3.8.1}%
+\contentsline {section}{\numberline {3.4}Starting with data}{55}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Inspecting Data Frame Objects}{58}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.5}Indexing and subsetting data frames}{58}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Factors}{63}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Converting factors}{65}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Renaming factors}{66}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Using \texttt {stringsAsFactors=FALSE}}{67}{subsection.3.6.3}%
+\contentsline {section}{\numberline {3.7}Formatting Dates}{68}{section.3.7}%
+\contentsline {section}{\numberline {3.8}manipulating and analyzing data with tidyverse}{72}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Data Manipulation using \textbf {\texttt {dplyr}} and \textbf {\texttt {tidyr}}}{72}{subsection.3.8.1}%
+\contentsline {subsubsection}{\numberline {3.8.1.1}What are \textbf {\texttt {dplyr}} and \textbf {\texttt {tidyr}}?}{73}{subsubsection.3.8.1.1}%
+\contentsline {subsubsection}{\numberline {3.8.1.2}Selecting columns and filtering rows}{75}{subsubsection.3.8.1.2}%
+\contentsline {subsubsection}{\numberline {3.8.1.3}Pipes}{77}{subsubsection.3.8.1.3}%
+\contentsline {paragraph}{\numberline {3.8.1.3.1}Mutate}{80}{paragraph.3.8.1.3.1}%
+\contentsline {paragraph}{\numberline {3.8.1.3.2}Split-apply-combine data analysis and the \texttt {summarize()} function}{83}{paragraph.3.8.1.3.2}%
+\contentsline {subparagraph}{\numberline {3.8.1.3.2.1}The \texttt {summarize()} function}{83}{subparagraph.3.8.1.3.2.1}%
+\contentsline {subparagraph}{\numberline {3.8.1.3.2.2}Counting}{89}{subparagraph.3.8.1.3.2.2}%
+\contentsline {paragraph}{\numberline {3.8.1.3.3}Reshaping with gather and spread}{92}{paragraph.3.8.1.3.3}%
+\contentsline {subparagraph}{\numberline {3.8.1.3.3.1}Spreading}{93}{subparagraph.3.8.1.3.3.1}%
+\contentsline {section}{\numberline {3.9}Exploratory data analysis}{95}{section.3.9}%
+\contentsline {subsection}{\numberline {3.9.1}Statistical variables and data}{96}{subsection.3.9.1}%
+\contentsline {subsubsection}{\numberline {3.9.1.1}Numeric vs.~categorical variables}{96}{subsubsection.3.9.1.1}%
+\contentsline {subsection}{\numberline {3.9.2}Understanding numerical variables}{97}{subsection.3.9.2}%
+\contentsline {subsection}{\numberline {3.9.3}Understanding categorical variables}{101}{subsection.3.9.3}%
+\contentsline {section}{\numberline {3.10}Regression with R}{104}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Linear Regression}{104}{subsection.3.10.1}%
+\contentsline {subsubsection}{\numberline {3.10.1.1}Formatting regression output: tidyr}{107}{subsubsection.3.10.1.1}%
+\contentsline {subsubsection}{\numberline {3.10.1.2}Regression Visualization}{107}{subsubsection.3.10.1.2}%
+\contentsline {subsection}{\numberline {3.10.2}Generalized Linear Model(GLM)}{108}{subsection.3.10.2}%
+\contentsline {subsection}{\numberline {3.10.3}Logistic Regression}{109}{subsection.3.10.3}%
+\contentsline {section}{\numberline {3.11}Anova with R}{111}{section.3.11}%
+\contentsline {part}{II\hspace {1em}Part 2}{112}{part.2}%
+\contentsline {chapter}{\numberline {4}Data Visualization with R}{113}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Basics of ggplot2}{113}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Importing data}{114}{subsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.1}Text files}{114}{subsubsection.4.1.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.2}Excel spreadsheets}{114}{subsubsection.4.1.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.1.3}Statistical packages}{115}{subsubsection.4.1.1.3}%
+\contentsline {subsection}{\numberline {4.1.2}Scatter plot}{116}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Bar Plot}{123}{subsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.3.1}Stacked bar chart}{123}{subsubsection.4.1.3.1}%
+\contentsline {subsubsection}{\numberline {4.1.3.2}Grouped bar chart}{124}{subsubsection.4.1.3.2}%
+\contentsline {section}{\numberline {4.2}Boxplots}{126}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Plotting time series data}{128}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Line Plot}{129}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Histograpm}{132}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Map}{133}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Map color}{138}{subsection.4.6.1}%
+\contentsline {chapter}{\numberline {5}Manuscript Preparation with RMarkdown in R}{143}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Publishing with R Markdown}{143}{section.5.1}%
+\contentsline {section}{\numberline {5.2}R Markdown Syntax}{143}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Rendering output}{145}{section.5.3}%
+\contentsline {section}{\numberline {5.4}How it works}{146}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Code Chunks}{147}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Inline Code}{148}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Code Languages}{149}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Academic Journals}{149}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Get started}{150}{subsection.5.8.1}%
+\contentsline {subsection}{\numberline {5.8.2}rticles templates}{150}{subsection.5.8.2}%
+\contentsline {fm}{Appendex 1}{153}{appendix*.4}%
+\contentsline {section}{\numberline {.1}Installing R and Rstudio}{153}{section.Alph0.1}%
+\contentsline {subsection}{\numberline {.1.1}installing R}{153}{subsection.Alph0.1.1}%
+\contentsline {subsection}{\numberline {.1.2}Installing RStudio}{156}{subsection.Alph0.1.2}%
+\contentsline {subsection}{\numberline {.1.3}Open RStudio}{157}{subsection.Alph0.1.3}%
+\contentsline {subsection}{\numberline {.1.4}Installing R packages}{159}{subsection.Alph0.1.4}%
+\contentsline {fm}{Appendex 2}{166}{appendix*.5}%
+\contentsline {section}{\numberline {.2}Installing OpenRefine}{166}{section.Alph0.2}%
+\contentsline {subsection}{\numberline {.2.1}Compatible operating system}{166}{subsection.Alph0.2.1}%
+\contentsline {subsection}{\numberline {.2.2}Java}{166}{subsection.Alph0.2.2}%
+\contentsline {subsection}{\numberline {.2.3}Compatible browser}{166}{subsection.Alph0.2.3}%
+\contentsline {fm}{References}{168}{appendix*.6}%
