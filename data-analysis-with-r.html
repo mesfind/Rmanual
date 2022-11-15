@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-11-14" />
+<meta name="date" content="2022-11-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -215,6 +215,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.5" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-shaping"><i class="fa fa-check"></i><b>2.5.5</b> Data Shaping</a></li>
 <li class="chapter" data-level="2.5.6" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#clustering"><i class="fa fa-check"></i><b>2.5.6</b> Clustering</a></li>
 </ul></li>
+<li class="chapter" data-level="2.6" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#how-to-cluster"><i class="fa fa-check"></i><b>2.6</b> How to Cluster</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html"><i class="fa fa-check"></i><b>3</b> Data Analysis with R</a>
 <ul>
@@ -611,27 +612,27 @@ Participant Manual<br />
 <h4><span class="header-section-number">3.3.6.4</span> Dates<a href="data-analysis-with-r.html#dates" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The common data structure you’ll deal with is a date variable. Typically dates require special treatment and to work as intended, but they can be stored as character strings or factors if desired. The following shows some of the base R functionality for this.</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="data-analysis-with-r.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.Date</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2022-11-14&quot;</code></pre>
+<pre><code>## [1] &quot;2022-11-15&quot;</code></pre>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="data-analysis-with-r.html#cb96-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="fu">Sys.Date</span>(), <span class="st">&#39;2022-05-25&#39;</span>, <span class="fu">Sys.Date</span>()<span class="sc">+</span><span class="dv">2</span>))</span>
 <span id="cb96-2"><a href="data-analysis-with-r.html#cb96-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
-<pre><code>## [1] &quot;2022-11-14&quot; &quot;2022-05-25&quot; &quot;2022-11-16&quot;</code></pre>
+<pre><code>## [1] &quot;2022-11-15&quot; &quot;2022-05-25&quot; &quot;2022-11-17&quot;</code></pre>
 <p>In almost every case however, a package like <code>lubridate</code> will make processing them much easier. The following shows how to strip out certain aspects of a date using it.</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="data-analysis-with-r.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
 <span id="cb98-2"><a href="data-analysis-with-r.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(<span class="fu">Sys.Date</span>())</span></code></pre></div>
 <pre><code>## [1] 11</code></pre>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="data-analysis-with-r.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
 <span id="cb100-2"><a href="data-analysis-with-r.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">day</span>(<span class="fu">Sys.Date</span>())</span></code></pre></div>
-<pre><code>## [1] 14</code></pre>
+<pre><code>## [1] 15</code></pre>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="data-analysis-with-r.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
 <span id="cb102-2"><a href="data-analysis-with-r.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(<span class="fu">Sys.Date</span>())  <span class="co"># week start day ( 1-Monday, 7-sunday)</span></span></code></pre></div>
-<pre><code>## [1] 2</code></pre>
+<pre><code>## [1] 3</code></pre>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="data-analysis-with-r.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarter</span>(<span class="fu">Sys.Date</span>())</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="data-analysis-with-r.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_date</span>(<span class="st">&#39;2022-01-01&#39;</span>) <span class="sc">+</span> <span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] &quot;2022-04-11&quot;</code></pre>
 <p>In general though, dates are treated as numeric variables, with consistent (but arbitrary) starting point. If you use these in analysis, you’ll probably want to make zero a useful value (e.g. the starting date)</p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="data-analysis-with-r.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">Sys.Date</span>())</span></code></pre></div>
-<pre><code>## [1] 19310</code></pre>
+<pre><code>## [1] 19311</code></pre>
 </div>
 </div>
 <div id="matrices" class="section level3 hasAnchor" number="3.3.7">

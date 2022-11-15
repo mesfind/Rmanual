@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2022-11-14" />
+<meta name="date" content="2022-11-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -215,6 +215,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.5" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-shaping"><i class="fa fa-check"></i><b>2.5.5</b> Data Shaping</a></li>
 <li class="chapter" data-level="2.5.6" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#clustering"><i class="fa fa-check"></i><b>2.5.6</b> Clustering</a></li>
 </ul></li>
+<li class="chapter" data-level="2.6" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#how-to-cluster"><i class="fa fa-check"></i><b>2.6</b> How to Cluster</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html"><i class="fa fa-check"></i><b>3</b> Data Analysis with R</a>
 <ul>
@@ -347,45 +348,41 @@ Participant Manual<br />
             <section class="normal" id="section-">
 <div id="data-cleaning-with-openrefine" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Data Cleaning with OpenRefine<a href="data-cleaning-with-openrefine.html#data-cleaning-with-openrefine" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Cleaning data is required before it can be analyzed. To provide consistent data, data cleaning identifies mistakes and corrects formatting. This procedure must be done with extreme caution since without clean data, analysis results may be inaccurate and non-reproducible.</p>
-<p>OpenRefine is a robust free and open source tool for dealing with untidy data, such as cleaning it and converting it to a different format.</p>
-<p>This course will show you how to use OpenRefine to successfully clean and format data while keeping track of any changes you make. Many users say that using this program saves them months of time compared to doing these modifications by hand.</p>
+<p>Data must be cleaned before it can be analyzed. Data cleaning identifies errors and corrects formatting to provide consistent data. This procedure must be carried out with extreme caution because analysis results may be inaccurate and non-reproducible without clean data.</p>
+<p>OpenRefine is a powerful free and open source data cleaning and conversion tool.</p>
+<p>This course will teach you how to successfully clean and format data using OpenRefine while keeping track of any changes you make. Many users claim that using this program saves them months of time when compared to making these changes by hand.</p>
 <div id="layout" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Layout<a href="data-cleaning-with-openrefine.html#layout" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Once you have imported your data, it is important to familiarize yourself with OpenRefine’s layout.</p>
+<p>After you’ve imported your data, you should become acquainted with the OpenRefine interface.</p>
 <ol style="list-style-type: decimal">
-<li>In the top right corner there are three buttons:</li>
+<li>There are three buttons in the upper right corner:</li>
 </ol>
-<!-- -->
 <ol style="list-style-type: lower-alpha">
-<li>“Open…” returns you to the home screen where you can select projects.</li>
-<li>“Export” opens a dropdown menu of options to export your data.</li>
-<li>“Help” opens the OpenRefine User Documentation in a new tab in your browser.</li>
+<li>“Open…” takes you back to the home screen, where you can choose projects.</li>
+<li>“Export” brings up a dropdown menu with options for exporting your data.</li>
+<li>“Help” opens the OpenRefine User Documentation in a new browser tab.</li>
 </ol>
 <p><img src="image/4.png" width="600" /></p>
 <ol start="2" style="list-style-type: decimal">
-<li>Below the bolded header stating how many rows/records there are two options:</li>
+<li>There are two options below the bolded header indicating the number of rows/records. :</li>
 </ol>
-<!-- -->
 <ol style="list-style-type: lower-alpha">
-<li>“Show as” allows you to change the grid view between rows and records. For more information on the difference between rows and records, see the explanation of Records and Rows below.</li>
-<li>“Show” allows you to change the number of rows/records visible in the grid view.</li>
+<li>“Show as” allows you to switch between rows and records in the grid view. See the explanation of Records and Rows below for more information on the distinction between rows and records.</li>
+<li>“Show” adjusts the number of rows/records visible in the grid view.</li>
 </ol>
 <p><img src="image/5.png" width="600" /></p>
 <ol start="3" style="list-style-type: decimal">
-<li>In the center of the page is your data in the grid view, which looks similar to Excel. Features of the grid view include:</li>
+<li>In the center of the page, your data is displayed in a grid view similar to Excel. The grid view has the following features:</li>
 </ol>
-<!-- -->
 <ol style="list-style-type: lower-alpha">
-<li>Column headings with dropdown arrows for chosing functions</li>
-<li>Row/Record numbers and alternate row/record shading</li>
-<li>Selectable flags and stars</li>
+<li>Column headings with dropdown arrows for function selection</li>
+<li>Row/Record numbers and alternate row/record shading </li>
+<li>Flags and stars that can be selected</li>
 </ol>
 <p><img src="image/6.png" width="600" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>On the left, there is a pane with two tabs:</li>
 </ol>
-<!-- -->
 <ol style="list-style-type: lower-alpha">
 <li>b”Facet/Filter” allows you to work on selected sections of your data, including faceting, clustering, and filtering.</li>
 <li>“Undo/Redo” tracks and stores your history, allows you to undo or redo transformations, and export a JSON file of your transformations.</li>
@@ -410,7 +407,6 @@ Participant Manual<br />
 <li>Go to the column you would like to rearrange or remove and click the arrow button on the column header.</li>
 <li>Select the “Edit columns” option and choose the option that best fits from the dropdown:</li>
 </ol>
-<!-- -->
 <ol style="list-style-type: lower-alpha">
 <li>Remove this column</li>
 <li>Move column to beginning</li>
@@ -435,7 +431,6 @@ Participant Manual<br />
 <li>Go to the column you would like to change and click the arrow button on the column header.</li>
 <li>Select the “View” option and pick the best option from the dropdown:</li>
 </ol>
-<!-- -->
 <ol style="list-style-type: lower-alpha">
 <li>Collapse this column</li>
 <li>Collapse all other columns</li>
@@ -693,8 +688,49 @@ This function can also be used to isolate specific dates, times, or date ranges.
 </div>
 <div id="clustering" class="section level3 hasAnchor" number="2.5.6">
 <h3><span class="header-section-number">2.5.6</span> Clustering<a href="data-cleaning-with-openrefine.html#clustering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-
+<p>Clustering is defined in OpenRefine as “finding groups of different values that may be alternative representations of the same thing.” The “Clustering” function is one of OpenRefine’s most powerful features. The Clustering function, which supports several types of key collision and nearest neighbor algorithms, can assist you in identifying inconsistencies in your data, such as misspellings, non-standardized value formatting, or input error.</p>
+<p>Clustering works by performing “fuzzy matching” on the values within a selected column using the algorithm of your choice to determine if possible cell values “look similar” enough to be potential matches. There are two types of algorithms supported by OpenRefine:</p>
+<ul>
+<li>Key collision</li>
+<li>Nearest neighbor</li>
+</ul>
+<p>For more information on the specific types of algorithms you can choose from, see the OpenRefine documentation on <a href="https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth">Clustering In Depth</a>.</p>
 </div>
+</div>
+<div id="how-to-cluster" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> How to Cluster<a href="data-cleaning-with-openrefine.html#how-to-cluster" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>There are two ways to open the clustering window:</li>
+</ol>
+<ol style="list-style-type: lower-roman">
+<li>On the column of your choice, perform a “Text facet.” At the top of the facet window, select the “Cluster” option. OR</li>
+<li>Go to the column you would like to cluster and click the arrow button on the column header, then select the “Edit cells” option and choose “Cluster and edit.”</li>
+</ol>
+<ol start="2" style="list-style-type: decimal">
+<li>In the Clustering window, you will see several options:</li>
+</ol>
+<ol style="list-style-type: lower-roman">
+<li>At the top of the window is where you can choose the type of algorithm to run.</li>
+<li>In the center of the window is a list of the suggested clusters, the current values, and suggested new value.</li>
+<li>On the right are several sliding scales which can be used to narrow the criteria for clustering: by number of choices in the cluster, number of total rows in the cluster, average length of the values in a cluster, or the variation in length of the values in a cluster.</li>
+</ol>
+<p><img src="image/37.png" width="600" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Choose the algorithm which best suits your needs and then consider the suggested clusters.</li>
+</ol>
+<ul>
+<li>For clusters you would like to keep, select the “Merge?” box and confirm that the text box in the “New Cell Value” column is consistent with the value you want to change the clustered values to.</li>
+<li>Repeat for each suggested cluster.</li>
+</ul>
+<p><img src="image/38.png" width="600" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>When you are ready, select either “Merge Selected &amp; Re-Cluster” or “Merge Selected &amp; Close.”</li>
+</ol>
+<ul>
+<li>“Merge Selected &amp; Re-Cluster” edits the selected values and then automatically re-runs the clustering algorithm on the same column.</li>
+<li>“Merge Selected &amp; Close” edits the selected values and then closes out of the Clustering window.</li>
+</ul>
+
 </div>
 </div>
             </section>
