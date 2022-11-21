@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Regression with R | R Manual</title>
+  <meta name="description" content="R and Manul" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Regression with R | R Manual" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/fig/MWULogo.jpeg" />
+  <meta property="og:description" content="R and Manul" />
+  <meta name="github-repo" content="Chapter 5 Regression with R | R Manual" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Regression with R | R Manual" />
+  
+  <meta name="twitter:description" content="R and Manul" />
+  <meta name="twitter:image" content="/fig/MWULogo.jpeg" />
+
+
+
+<meta name="date" content="2022-11-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-visualization-with-r.html"/>
+<link rel="next" href="scientific-publishing-with-quarto-in-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-information-and-conventions"><i class="fa fa-check"></i>Software information and conventions</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html"><i class="fa fa-check"></i><b>1</b> Data Organization with Spreadsheet</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#spreadsheet-programs"><i class="fa fa-check"></i><b>1.1</b> Spreadsheet Programs</a></li>
+<li class="chapter" data-level="1.2" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#formatting-data-tables"><i class="fa fa-check"></i><b>1.2</b> Formatting data tables</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#problems-with-spreadsheets"><i class="fa fa-check"></i><b>1.2.1</b> Problems with Spreadsheets</a></li>
+<li class="chapter" data-level="1.2.2" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#use-of-spreadsheets-for-data-entery-and-cleaning"><i class="fa fa-check"></i><b>1.2.2</b> Use of Spreadsheets for Data Entery and Cleaning</a></li>
+<li class="chapter" data-level="1.2.3" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#keeping-track-of-your-analyses"><i class="fa fa-check"></i><b>1.2.3</b> Keeping track of your analyses</a></li>
+<li class="chapter" data-level="1.2.4" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#structuring-data-in-spreadsheets"><i class="fa fa-check"></i><b>1.2.4</b> Structuring data in spreadsheets</a></li>
+<li class="chapter" data-level="1.2.5" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#columns-for-variables-and-rows-for-observations"><i class="fa fa-check"></i><b>1.2.5</b> Columns for variables and rows for observations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#common-spreadsheet-errors"><i class="fa fa-check"></i><b>1.3</b> Common Spreadsheet Errors</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#using-multiple-tabs"><i class="fa fa-check"></i><b>1.3.1</b> Using multiple tabs</a></li>
+<li class="chapter" data-level="1.3.2" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#not-filling-in-zeros"><i class="fa fa-check"></i><b>1.3.2</b> Not filling in zeros</a></li>
+<li class="chapter" data-level="1.3.3" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#using-problematic-null-values"><i class="fa fa-check"></i><b>1.3.3</b> Using problematic null values</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="data-organization-with-spreadsheet.html"><a href="data-organization-with-spreadsheet.html#date-as-data"><i class="fa fa-check"></i><b>1.4</b> Date as data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning with OpenRefine</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#layout"><i class="fa fa-check"></i><b>2.1</b> Layout</a></li>
+<li class="chapter" data-level="2.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#records-and-rows"><i class="fa fa-check"></i><b>2.2</b> Records and Rows</a></li>
+<li class="chapter" data-level="2.3" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#changing-the-grid-view"><i class="fa fa-check"></i><b>2.3</b> Changing the Grid View</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#permanent-changes"><i class="fa fa-check"></i><b>2.3.1</b> Permanent Changes</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#non-permanent-changes"><i class="fa fa-check"></i><b>2.3.2</b> Non-Permanent Changes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-mining-and-discovery"><i class="fa fa-check"></i><b>2.4</b> Data Mining and Discovery</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#reordering-columns"><i class="fa fa-check"></i><b>2.4.1</b> Reordering Columns</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#sorting-data"><i class="fa fa-check"></i><b>2.4.2</b> Sorting Data</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#text-based-discovery"><i class="fa fa-check"></i><b>2.4.3</b> Text Based Discovery</a></li>
+<li class="chapter" data-level="2.4.4" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#number-and-data-based-discovery"><i class="fa fa-check"></i><b>2.4.4</b> Number and Data Based Discovery</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-preparation-and-normalization"><i class="fa fa-check"></i><b>2.5</b> Data Preparation and Normalization</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#common-transformations"><i class="fa fa-check"></i><b>2.5.1</b> Common Transformations</a></li>
+<li class="chapter" data-level="2.5.2" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#removing-duplicates"><i class="fa fa-check"></i><b>2.5.2</b> Removing Duplicates</a></li>
+<li class="chapter" data-level="2.5.3" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#splitting-cell-values"><i class="fa fa-check"></i><b>2.5.3</b> Splitting Cell Values</a></li>
+<li class="chapter" data-level="2.5.4" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#combining-cell-values"><i class="fa fa-check"></i><b>2.5.4</b> Combining cell Values</a></li>
+<li class="chapter" data-level="2.5.5" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#data-shaping"><i class="fa fa-check"></i><b>2.5.5</b> Data Shaping</a></li>
+<li class="chapter" data-level="2.5.6" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#clustering"><i class="fa fa-check"></i><b>2.5.6</b> Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="data-cleaning-with-openrefine.html"><a href="data-cleaning-with-openrefine.html#how-to-cluster"><i class="fa fa-check"></i><b>2.6</b> How to Cluster</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html"><i class="fa fa-check"></i><b>3</b> Data Analysis with R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#what-is-r-what-is-rstudio"><i class="fa fa-check"></i><b>3.1</b> What is R? What is RStudio?</a></li>
+<li class="chapter" data-level="3.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#why-learn-r"><i class="fa fa-check"></i><b>3.2</b> Why learn R?</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-does-not-involve-lots-of-pointing-and-clicking-and-thats-a-good-thing"><i class="fa fa-check"></i><b>3.2.1</b> R does not involve lots of pointing and clicking, and that’s a good thing</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-code-is-great-for-reproducibility"><i class="fa fa-check"></i><b>3.2.2</b> R code is great for reproducibility</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-is-interdisciplinary-and-extensible"><i class="fa fa-check"></i><b>3.2.3</b> R is interdisciplinary and extensible</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-works-on-data-of-all-shapes-and-sizes"><i class="fa fa-check"></i><b>3.2.4</b> R works on data of all shapes and sizes</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-produces-high-quality-graphics"><i class="fa fa-check"></i><b>3.2.5</b> R produces high-quality graphics</a></li>
+<li class="chapter" data-level="3.2.6" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#r-has-a-large-and-welcoming-community"><i class="fa fa-check"></i><b>3.2.6</b> R has a large and welcoming community</a></li>
+<li class="chapter" data-level="3.2.7" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#not-only-is-r-free-but-it-is-also-open-source-and-cross-platform"><i class="fa fa-check"></i><b>3.2.7</b> Not only is R free, but it is also open-source and cross-platform</a></li>
+<li class="chapter" data-level="3.2.8" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#knowing-your-way-around-rstudio"><i class="fa fa-check"></i><b>3.2.8</b> Knowing your way around RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#introduction-to-r"><i class="fa fa-check"></i><b>3.3</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#comments"><i class="fa fa-check"></i><b>3.3.1</b> Comments</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#functions-and-their-arguments"><i class="fa fa-check"></i><b>3.3.2</b> Functions and their arguments</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#data-structure"><i class="fa fa-check"></i><b>3.3.3</b> Data Structure</a></li>
+<li class="chapter" data-level="3.3.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3.4</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="3.3.5" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#conditional-subsetting"><i class="fa fa-check"></i><b>3.3.5</b> Conditional subsetting</a></li>
+<li class="chapter" data-level="3.3.6" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#missing-data"><i class="fa fa-check"></i><b>3.3.6</b> Missing Data</a></li>
+<li class="chapter" data-level="3.3.7" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#matrices"><i class="fa fa-check"></i><b>3.3.7</b> Matrices</a></li>
+<li class="chapter" data-level="3.3.8" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#data-frames"><i class="fa fa-check"></i><b>3.3.8</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#starting-with-data"><i class="fa fa-check"></i><b>3.4</b> Starting with data</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#inspecting-data-frame-objects"><i class="fa fa-check"></i><b>3.4.1</b> Inspecting Data Frame Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#indexing-and-subsetting-data-frames"><i class="fa fa-check"></i><b>3.5</b> Indexing and subsetting data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#factors-1"><i class="fa fa-check"></i><b>3.6</b> Factors</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#converting-factors"><i class="fa fa-check"></i><b>3.6.1</b> Converting factors</a></li>
+<li class="chapter" data-level="3.6.2" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#renaming-factors"><i class="fa fa-check"></i><b>3.6.2</b> Renaming factors</a></li>
+<li class="chapter" data-level="3.6.3" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#using-stringsasfactorsfalse"><i class="fa fa-check"></i><b>3.6.3</b> Using <code>stringsAsFactors=FALSE</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#formatting-dates"><i class="fa fa-check"></i><b>3.7</b> Formatting Dates</a></li>
+<li class="chapter" data-level="3.8" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#manipulating-and-analyzing-data-with-tidyverse"><i class="fa fa-check"></i><b>3.8</b> manipulating and analyzing data with tidyverse</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="data-analysis-with-r.html"><a href="data-analysis-with-r.html#data-manipulation-using-dplyr-and-tidyr"><i class="fa fa-check"></i><b>3.8.1</b> Data Manipulation using <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html"><i class="fa fa-check"></i><b>4</b> Data Visualization with R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#basics-of-ggplot2"><i class="fa fa-check"></i><b>4.1</b> Basics of ggplot2</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#importing-data"><i class="fa fa-check"></i><b>4.1.1</b> Importing data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.2</b> Exploratory data analysis</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#statistical-variables-and-data"><i class="fa fa-check"></i><b>4.2.1</b> Statistical variables and data</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#understanding-numerical-variables"><i class="fa fa-check"></i><b>4.2.2</b> Understanding numerical variables</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#understanding-categorical-variables"><i class="fa fa-check"></i><b>4.2.3</b> Understanding categorical variables</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#scatter-plot"><i class="fa fa-check"></i><b>4.2.4</b> Scatter plot</a></li>
+<li class="chapter" data-level="4.2.5" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#bar-plot"><i class="fa fa-check"></i><b>4.2.5</b> Bar Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#boxplots"><i class="fa fa-check"></i><b>4.3</b> Boxplots</a></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#plotting-time-series-data"><i class="fa fa-check"></i><b>4.4</b> Plotting time series data</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#line-plot"><i class="fa fa-check"></i><b>4.5</b> Line Plot</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#histograpm"><i class="fa fa-check"></i><b>4.6</b> Histograpm</a></li>
+<li class="chapter" data-level="4.7" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#arranging-plots-into-a-grid"><i class="fa fa-check"></i><b>4.7</b> Arranging plots into a grid</a></li>
+<li class="chapter" data-level="4.8" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#special-ggplot2-plotting-extensions"><i class="fa fa-check"></i><b>4.8</b> Special ggplot2 plotting extensions</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#ggcharts"><i class="fa fa-check"></i><b>4.8.1</b> ggcharts</a></li>
+<li class="chapter" data-level="4.8.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#based-plots-with-statistical-details"><i class="fa fa-check"></i><b>4.8.2</b> Based Plots with Statistical Details</a></li>
+<li class="chapter" data-level="4.8.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#gganimate"><i class="fa fa-check"></i><b>4.8.3</b> gganimate</a></li>
+<li class="chapter" data-level="4.8.4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#gggenes"><i class="fa fa-check"></i><b>4.8.4</b> gggenes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#mapping-with-r"><i class="fa fa-check"></i><b>4.9</b> Mapping with R</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#map-color"><i class="fa fa-check"></i><b>4.9.1</b> Map color</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regression-with-r.html"><a href="regression-with-r.html"><i class="fa fa-check"></i><b>5</b> Regression with R</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="regression-with-r.html"><a href="regression-with-r.html#hypotheses-and-null-hypotheses"><i class="fa fa-check"></i><b>5.0.1</b> Hypotheses and null hypotheses</a></li>
+<li class="chapter" data-level="5.0.2" data-path="regression-with-r.html"><a href="regression-with-r.html#linear-regression"><i class="fa fa-check"></i><b>5.0.2</b> Linear Regression</a></li>
+<li class="chapter" data-level="5.0.3" data-path="regression-with-r.html"><a href="regression-with-r.html#generalized-linear-modelglm"><i class="fa fa-check"></i><b>5.0.3</b> Generalized Linear Model(GLM)</a></li>
+<li class="chapter" data-level="5.0.4" data-path="regression-with-r.html"><a href="regression-with-r.html#logistic-regression"><i class="fa fa-check"></i><b>5.0.4</b> Logistic Regression</a></li>
+<li class="chapter" data-level="5.1" data-path="regression-with-r.html"><a href="regression-with-r.html#anova-with-r"><i class="fa fa-check"></i><b>5.1</b> Anova with R</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="regression-with-r.html"><a href="regression-with-r.html#steps-to-conduct-an-anova"><i class="fa fa-check"></i><b>5.1.1</b> 3 Steps to conduct an ANOVA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html"><i class="fa fa-check"></i><b>6</b> Scientific Publishing with Quarto in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#publishing-with-quarto"><i class="fa fa-check"></i><b>6.1</b> Publishing with Quarto</a></li>
+<li class="chapter" data-level="6.2" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#markdown-basics"><i class="fa fa-check"></i><b>6.2</b> Markdown Basics</a></li>
+<li class="chapter" data-level="6.3" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#r-markdown-syntax"><i class="fa fa-check"></i><b>6.3</b> R Markdown Syntax</a></li>
+<li class="chapter" data-level="6.4" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#rendering-output"><i class="fa fa-check"></i><b>6.4</b> Rendering output</a></li>
+<li class="chapter" data-level="6.5" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#how-it-works"><i class="fa fa-check"></i><b>6.5</b> How it works</a></li>
+<li class="chapter" data-level="6.6" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#code-chunks"><i class="fa fa-check"></i><b>6.6</b> Code Chunks</a></li>
+<li class="chapter" data-level="6.7" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#inline-code"><i class="fa fa-check"></i><b>6.7</b> Inline Code</a></li>
+<li class="chapter" data-level="6.8" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#code-languages"><i class="fa fa-check"></i><b>6.8</b> Code Languages</a></li>
+<li class="chapter" data-level="6.9" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#academic-journals"><i class="fa fa-check"></i><b>6.9</b> Academic Journals</a>
+<ul>
+<li class="chapter" data-level="6.9.1" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#get-started"><i class="fa fa-check"></i><b>6.9.1</b> Get started</a></li>
+<li class="chapter" data-level="6.9.2" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#rticles-templates"><i class="fa fa-check"></i><b>6.9.2</b> rticles templates</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#essential-commands-with-quarto"><i class="fa fa-check"></i><b>6.10</b> Essential commands with Quarto</a>
+<ul>
+<li class="chapter" data-level="6.10.1" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#rendering"><i class="fa fa-check"></i><b>6.10.1</b> Rendering</a></li>
+<li class="chapter" data-level="6.10.2" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#authoring"><i class="fa fa-check"></i><b>6.10.2</b> Authoring</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#creating-journal-articles"><i class="fa fa-check"></i><b>6.11</b> Creating Journal Articles</a></li>
+<li class="chapter" data-level="6.12" data-path="scientific-publishing-with-quarto-in-r.html"><a href="scientific-publishing-with-quarto-in-r.html#creating-books"><i class="fa fa-check"></i><b>6.12</b> Creating books</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="" data-path="appendex-1.html"><a href="appendex-1.html"><i class="fa fa-check"></i>Appendex 1</a>
+<ul>
+<li class="chapter" data-level="13" data-path="appendex-1.html"><a href="appendex-1.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>13</b> Installing R and Rstudio</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="appendex-1.html"><a href="appendex-1.html#installing-r"><i class="fa fa-check"></i><b>13.1</b> installing R</a></li>
+<li class="chapter" data-level="13.2" data-path="appendex-1.html"><a href="appendex-1.html#installing-rstudio"><i class="fa fa-check"></i><b>13.2</b> Installing RStudio</a></li>
+<li class="chapter" data-level="13.3" data-path="appendex-1.html"><a href="appendex-1.html#open-rstudio"><i class="fa fa-check"></i><b>13.3</b> Open RStudio</a></li>
+<li class="chapter" data-level="13.4" data-path="appendex-1.html"><a href="appendex-1.html#installing-r-packages"><i class="fa fa-check"></i><b>13.4</b> Installing R packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="A" data-path="install-gdal-and-geos.html"><a href="install-gdal-and-geos.html"><i class="fa fa-check"></i><b>A</b> Install gdal and geos</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="install-gdal-and-geos.html"><a href="install-gdal-and-geos.html#on-windows"><i class="fa fa-check"></i><b>A.1</b> on Windows</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="install-mapping-library.html"><a href="install-mapping-library.html"><i class="fa fa-check"></i><b>B</b> Install Mapping Library</a></li>
+<li class="chapter" data-level="C" data-path="download-spatial-data.html"><a href="download-spatial-data.html"><i class="fa fa-check"></i><b>C</b> Download spatial data</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://mesfind.github.io" target="blank">&copy Mesfin Diro</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div class="line-block">Data Analysis , Visualization, and Scientfic Publishing with R &amp; Rstudio<br />
+<br />
+Participant Manual<br />
+</div></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regression-with-r" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Regression with R<a href="regression-with-r.html#regression-with-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="hypotheses-and-null-hypotheses" class="section level3 hasAnchor" number="5.0.1">
+<h3><span class="header-section-number">5.0.1</span> Hypotheses and null hypotheses<a href="regression-with-r.html#hypotheses-and-null-hypotheses" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Stages in the scientific process are:</p>
+<ul>
+<li>Observation :- <em>information, or impression, about events or objects</em>.</li>
+<li>Question :— <em>what it is that you want to know; the scope of your investigation</em>.</li>
+<li>Hypothesis:— <em>an explanation proposed to account for observed facts</em>.</li>
+<li>Prediction:— <em>what you would expect to see if the hypothesis was true</em>.</li>
+</ul></li>
+<li><p>The null hypothesis, denoted H0, is the statement about the population parameter that is assumed to be true unless there is convincing evidence to the contrary.</p></li>
+<li><p>The alternative hypothesis, denoted Ha, is a statement about the population parameter that is contradictory to the null hypothesis, and is accepted as true only if there is convincing evidence in favor of it.</p></li>
+<li><p>The null hypothesis corresponds to the idea that an observed difference is due to chance. The alternative hypothesis corresponds to the idea that the observed difference is real.</p></li>
+<li><p>We’ll be able to collect data to evaluate our ideas once we’ve finalized our hypotheses and predictions. We will either accept or reject our various hypotheses based on these data. The most important thing to remember about hypothesis testing is that hypotheses are either rejected or not rejected in science, but they are rarely established, even in the most trivial instances.</p></li>
+<li><p>After analyzing the evidence showing our hypothesis’ predictions are correct, we can either accept it as the best current explanation for the observations or reject it and look for new hypotheses. For these hypotheses, the same approach must be followed.</p></li>
+<li><p>It’s vital to remember that when explaining science, we don’t report null hypotheses. The null hypothesis is merely a tool for constructing a frequentist statistical test. In and of itself, it is neither entertaining nor beneficial. Again, for the sake of clarity. In a report or a presentation, there is no need to state the null hypothesis for each and every test.</p></li>
+<li><p>R will typically display <code>p-values</code> from a statistical significance test to six decimal places (e.g. p = 0.003672). However, when we write about them, the results from tests are usually presented as one of the following four categories:</p>
+<ul>
+<li><p><span class="math inline">\(p &gt; 0.05\)</span>, for results which are not statistically significant (sometimes also written as ‘NS’),</p></li>
+<li><p><span class="math inline">\(p &lt; 0.05\)</span>, for results where <span class="math inline">\(0.01 &lt; p &lt; 0.05\)</span>,</p></li>
+<li><p><span class="math inline">\(p &lt; 0.01\)</span>, for results where <span class="math inline">\(0.001 &lt; p &lt; 0.01\)</span>,</p></li>
+<li><p><span class="math inline">\(p &lt; 0.001\)</span> for results where <span class="math inline">\(p &lt; 0.001\)</span>,</p></li>
+</ul></li>
+<li><p>It is common to see ranges of probabilities coded with asterisks in tables and figures:</p>
+<ul>
+<li><p><code>*</code>for <span class="math inline">\(p = 0.05 \cdots 0.01\)</span>,</p></li>
+<li><p><code>**</code> for <span class="math inline">\(p = 0.01 \cdots0.001\)</span>,</p></li>
+<li><p><code>***</code> for <span class="math inline">\(p &lt; 0.001\)</span> .</p></li>
+</ul></li>
+</ul>
+<p>This is common in tables and figures as it is a more compact and visually obvious representation than numbers. Never use the asterisks convention in the text of a report.</p>
+<ul>
+<li><p>We use a chi-square test for independence when we want to formally test whether or not there is a statistically significant association between two categorical variables.</p></li>
+<li><p>The hypotheses of the test are as follows:</p>
+<ul>
+<li><p>Null hypothesis (H0): There is no significant association between the two variables.</p></li>
+<li><p>Alternative hypothesis: (Ha): There is a significant association between the two variables.</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="linear-regression" class="section level3 hasAnchor" number="5.0.2">
+<h3><span class="header-section-number">5.0.2</span> Linear Regression<a href="regression-with-r.html#linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Linear regression allows us to explore the relationship between a quantitative response variable and an explanatory variable while other variables are held constant.</p>
+<p>In a linear model, given a vector of inputs, <span class="math inline">\(X^T = (X_1, X_2, ..., X_p)\)</span>, we
+predict the output <span class="math inline">\(Y\)</span> via the model:</p>
+<p><span class="math display">\[\hat{Y} = \hat{\beta}_0 + \sum_{j=1}^p X_j \hat{\beta}_j\]</span></p>
+<p>The term <span class="math inline">\(\hat{\beta}_0\)</span> is the intercept, also known as the <em>bias</em> in machine
+learning. Often it is convenient to include the constant variable <span class="math inline">\(1\)</span> in <span class="math inline">\(X\)</span>,
+include <span class="math inline">\(\beta_0\)</span> in the vector of coefficients <span class="math inline">\(\hat{\beta}\)</span>, and then write
+the linear model in vector form as an inner product,</p>
+<p><span class="math display">\[\hat{Y} = X^T\hat{\beta},\]</span></p>
+<p>where <span class="math inline">\(X^T\)</span> denotes the transpose of the design matrix.</p>
+<p><strong>Ordinary Least Squares (OLS)</strong></p>
+<p>There are many different methods to fitting a linear model, but the most simple
+and popular method is <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">Ordinary Least
+Squares</a> (OLS). The OLS
+method minimizes the <a href="https://en.wikipedia.org/wiki/Residual_sum_of_squares">residual sum of
+squares</a> (RSS), and leads
+to a closed-form expression for the estimated value of the unknown parameter
+<span class="math inline">\(\beta\)</span>.</p>
+<p><span class="math display">\[RSS(\beta) = \sum_{i=1}^n (y_i - x_i^T\beta)^2\]</span></p>
+<p><span class="math inline">\(RSS(\beta)\)</span> is a quadradic function of the parameters, and hence its minimum
+always exists, but may not be unique. The solution is easiest to characterize
+in matrix notation:</p>
+<p><span class="math display">\[RSS(\beta) = (\boldsymbol{y} - \boldsymbol{X}\beta)^T(\boldsymbol{y} -
+\boldsymbol{X}\beta)\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{X}\)</span> is an <span class="math inline">\(n \times p\)</span> matrix with each row an input vector,
+and <span class="math inline">\(\boldsymbol{y}\)</span> is a vector of length <span class="math inline">\(n\)</span> representing the response in the
+training set. Differentiating with respect to <span class="math inline">\(\beta\)</span>, we get the <em>normal
+equations</em>,</p>
+<p><span class="math display">\[\boldsymbol{X}^T(\boldsymbol{y} - \boldsymbol{X}\beta) = 0\]</span></p>
+<p>Consider predicting property values based on lot size (square feet), age (years), land value (thousands of dollars), living area (square feet), number of bedrooms and bathrooms, and whether or not the home is on the waterfront.</p>
+<p>The basic method of performing a linear regression in R is to the use the <code>lm()</code> function.</p>
+<p>To see the parameter estimates alone, you can just call the <code>lm()</code> function. But much more results are available if you save the results to a regression output object, which can then be accessed using the <code>summary()</code> function.</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="regression-with-r.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb315-2"><a href="regression-with-r.html#cb315-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb315-3"><a href="regression-with-r.html#cb315-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb315-4"><a href="regression-with-r.html#cb315-4" aria-hidden="true" tabindex="-1"></a>houses <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/houses.csv&quot;</span>)</span>
+<span id="cb315-5"><a href="regression-with-r.html#cb315-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb315-6"><a href="regression-with-r.html#cb315-6" aria-hidden="true" tabindex="-1"></a><span class="co">#fit the model</span></span>
+<span id="cb315-7"><a href="regression-with-r.html#cb315-7" aria-hidden="true" tabindex="-1"></a>houses_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(price <span class="sc">~</span> lotSize <span class="sc">+</span> age <span class="sc">+</span> landValue <span class="sc">+</span></span>
+<span id="cb315-8"><a href="regression-with-r.html#cb315-8" aria-hidden="true" tabindex="-1"></a>                  livingArea <span class="sc">+</span> bedrooms <span class="sc">+</span> bathrooms<span class="sc">+</span>waterfront, </span>
+<span id="cb315-9"><a href="regression-with-r.html#cb315-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> houses)</span>
+<span id="cb315-10"><a href="regression-with-r.html#cb315-10" aria-hidden="true" tabindex="-1"></a><span class="co"># the summary of the  model</span></span>
+<span id="cb315-11"><a href="regression-with-r.html#cb315-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(houses_lm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = price ~ lotSize + age + landValue + livingArea + 
+##     bedrooms + bathrooms + waterfront, data = houses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -220208  -35416   -5443   27570  464320 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    1.915e+04  6.428e+03   2.980 0.002927 ** 
+## lotSize        7.501e+03  2.075e+03   3.615 0.000309 ***
+## age           -1.360e+02  5.416e+01  -2.512 0.012099 *  
+## landValue      9.093e-01  4.583e-02  19.841  &lt; 2e-16 ***
+## livingArea     7.518e+01  4.158e+00  18.080  &lt; 2e-16 ***
+## bedrooms      -5.767e+03  2.388e+03  -2.414 0.015863 *  
+## bathrooms      2.455e+04  3.332e+03   7.366 2.71e-13 ***
+## waterfrontYes  1.207e+05  1.560e+04   7.738 1.70e-14 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 59370 on 1720 degrees of freedom
+## Multiple R-squared:  0.6378, Adjusted R-squared:  0.6363 
+## F-statistic: 432.6 on 7 and 1720 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>And we can use the anova() method to get an ANOVA-style table of the model:</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="regression-with-r.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="co"># interval estimates for our coefficients:</span></span>
+<span id="cb317-2"><a href="regression-with-r.html#cb317-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb317-3"><a href="regression-with-r.html#cb317-3" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(houses_lm)</span></code></pre></div>
+<pre><code>##                       2.5 %        97.5 %
+## (Intercept)    6.544790e+03  3.175958e+04
+## lotSize        3.430737e+03  1.157085e+04
+## age           -2.422625e+02 -2.981775e+01
+## landValue      8.194178e-01  9.991965e-01
+## livingArea     6.702317e+01  8.333415e+01
+## bedrooms      -1.045130e+04 -1.082222e+03
+## bathrooms      1.801138e+04  3.108283e+04
+## waterfrontYes  9.012803e+04  1.513252e+05</code></pre>
+<div id="formatting-regression-output-tidyr" class="section level4 hasAnchor" number="5.0.2.1">
+<h4><span class="header-section-number">5.0.2.1</span> Formatting regression output: tidyr<a href="regression-with-r.html#formatting-regression-output-tidyr" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>With the <code>tidy()</code> function from the broom package, you can easily create standard regression output tables.</p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="regression-with-r.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb319-2"><a href="regression-with-r.html#cb319-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(houses_lm)</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 5
+##   term            estimate  std.error statistic  p.value
+##   &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    19152.     6428.          2.98 2.93e- 3
+## 2 lotSize         7501.     2075.          3.61 3.09e- 4
+## 3 age             -136.       54.2        -2.51 1.21e- 2
+## 4 landValue          0.909     0.0458     19.8  4.72e-79
+## 5 livingArea        75.2       4.16       18.1  4.95e-67
+## 6 bedrooms       -5767.     2388.         -2.41 1.59e- 2
+## 7 bathrooms      24547.     3332.          7.37 2.71e-13
+## 8 waterfrontYes 120727.    15601.          7.74 1.70e-14</code></pre>
+</div>
+<div id="regression-visualization" class="section level4 hasAnchor" number="5.0.2.2">
+<h4><span class="header-section-number">5.0.2.2</span> Regression Visualization<a href="regression-with-r.html#regression-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The <code>visreg</code> function takes (1) the model and (2) the variable of interest and plots the conditional relationship, controlling for the other variables. A ggplot2 graph is created with the argument <strong>gg = TRUE</strong>.</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="regression-with-r.html#cb321-1" aria-hidden="true" tabindex="-1"></a>houses <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/houses.csv&quot;</span>)</span>
+<span id="cb321-2"><a href="regression-with-r.html#cb321-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-3"><a href="regression-with-r.html#cb321-3" aria-hidden="true" tabindex="-1"></a>houses_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(price <span class="sc">~</span> lotSize <span class="sc">+</span> age <span class="sc">+</span> landValue <span class="sc">+</span></span>
+<span id="cb321-4"><a href="regression-with-r.html#cb321-4" aria-hidden="true" tabindex="-1"></a>                  livingArea <span class="sc">+</span> bedrooms <span class="sc">+</span> bathrooms <span class="sc">+</span></span>
+<span id="cb321-5"><a href="regression-with-r.html#cb321-5" aria-hidden="true" tabindex="-1"></a>                  waterfront, </span>
+<span id="cb321-6"><a href="regression-with-r.html#cb321-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> houses)</span>
+<span id="cb321-7"><a href="regression-with-r.html#cb321-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(houses_lm)<span class="sc">%&gt;%</span></span>
+<span id="cb321-8"><a href="regression-with-r.html#cb321-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>()</span></code></pre></div>
+<pre><code>##                    Estimate   Std. Error   t value     Pr(&gt;|t|)
+## (Intercept)    1.915218e+04 6.427936e+03  2.979523 2.927430e-03
+## lotSize        7.500792e+03 2.075136e+03  3.614604 3.094673e-04
+## age           -1.360401e+02 5.415794e+01 -2.511914 1.209876e-02
+## landValue      9.093072e-01 4.583046e-02 19.840672 4.716289e-79
+## livingArea     7.517866e+01 4.158113e+00 18.079993 4.954903e-67
+## bedrooms      -5.766760e+03 2.388433e+03 -2.414454 1.586262e-02
+## bathrooms      2.454711e+04 3.332268e+03  7.366487 2.705486e-13
+## waterfrontYes  1.207266e+05 1.560083e+04  7.738475 1.703303e-14</code></pre>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="regression-with-r.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conditional plot of price vs. living area</span></span>
+<span id="cb323-2"><a href="regression-with-r.html#cb323-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(visreg)</span>
+<span id="cb323-3"><a href="regression-with-r.html#cb323-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb323-4"><a href="regression-with-r.html#cb323-4" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(houses_lm, <span class="st">&quot;livingArea&quot;</span>, <span class="at">gg =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb323-5"><a href="regression-with-r.html#cb323-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">label =</span> scales<span class="sc">::</span>dollar) <span class="sc">+</span></span>
+<span id="cb323-6"><a href="regression-with-r.html#cb323-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between price and location&quot;</span>,</span>
+<span id="cb323-7"><a href="regression-with-r.html#cb323-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;controlling for lot size, age, land value, bedrooms and bathrooms&quot;</span>,</span>
+<span id="cb323-8"><a href="regression-with-r.html#cb323-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;source: Saratoga Housing Data (2006)&quot;</span>,</span>
+<span id="cb323-9"><a href="regression-with-r.html#cb323-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Home Price&quot;</span>,</span>
+<span id="cb323-10"><a href="regression-with-r.html#cb323-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Waterfront&quot;</span>)</span></code></pre></div>
+<p><img src="Rmanual_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+</div>
+</div>
+<div id="generalized-linear-modelglm" class="section level3 hasAnchor" number="5.0.3">
+<h3><span class="header-section-number">5.0.3</span> Generalized Linear Model(GLM)<a href="regression-with-r.html#generalized-linear-modelglm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The generalized linear model (GLM) is a variant of ordinary linear regression that allows for response variables with error distribution models other than a normal distribution, such as the Gaussian distribution.</p>
+<p>GLMs are fit with function <code>glm()</code>. Like linear models <code>(lm()s)</code>, <code>glm()s</code> have formulas and data as inputs, but also have a family input. Generalized Linear Model Syntax:</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="regression-with-r.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>( price <span class="sc">~</span> lotSize <span class="sc">+</span> age <span class="sc">+</span> landValue <span class="sc">+</span></span>
+<span id="cb324-2"><a href="regression-with-r.html#cb324-2" aria-hidden="true" tabindex="-1"></a>                  livingArea <span class="sc">+</span> bedrooms <span class="sc">+</span> bathrooms, <span class="at">data=</span>houses, <span class="at">family =</span><span class="st">&quot;gaussian&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:  glm(formula = price ~ lotSize + age + landValue + livingArea + 
+##     bedrooms + bathrooms, family = &quot;gaussian&quot;, data = houses)
+## 
+## Coefficients:
+## (Intercept)      lotSize          age    landValue   livingArea     bedrooms  
+##  22462.4015    7459.0035    -122.4922       0.9541      75.3707   -7298.7108  
+##   bathrooms  
+##  24719.1355  
+## 
+## Degrees of Freedom: 1727 Total (i.e. Null);  1721 Residual
+## Null Deviance:       1.674e+13 
+## Residual Deviance: 6.273e+12     AIC: 42960</code></pre>
+<p>The Gaussian family is how R refers to the normal distribution and is the default for a <strong>glm()</strong>. If the family is Gaussian then a GLM is the same as an LM. Non-normal errors or distributions can occur in generalized linear models.However, the possible distributions are constrained. You can, for example, use the Poisson family for count data or the binomial family for binomial data.</p>
+</div>
+<div id="logistic-regression" class="section level3 hasAnchor" number="5.0.4">
+<h3><span class="header-section-number">5.0.4</span> Logistic Regression<a href="regression-with-r.html#logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>While other variables are kept constant, logistic regression can be used to investigate the relationship between a binary response variable and an explanatory variable. There are two levels to binary response variables (yes/no, lived/died, pass/fail, malignant/benign). The <code>visreg</code> package, like linear regression, may be used to illustrate these relationships.</p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="regression-with-r.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb326-2"><a href="regression-with-r.html#cb326-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(visreg)</span>
+<span id="cb326-3"><a href="regression-with-r.html#cb326-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb326-4"><a href="regression-with-r.html#cb326-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb326-5"><a href="regression-with-r.html#cb326-5" aria-hidden="true" tabindex="-1"></a>marriage <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/marriage.csv&quot;</span>,<span class="at">stringsAsFactors =</span> T)</span>
+<span id="cb326-6"><a href="regression-with-r.html#cb326-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb326-7"><a href="regression-with-r.html#cb326-7" aria-hidden="true" tabindex="-1"></a><span class="co">#LR</span></span>
+<span id="cb326-8"><a href="regression-with-r.html#cb326-8" aria-hidden="true" tabindex="-1"></a>married_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(married <span class="sc">~</span> sex <span class="sc">+</span> age <span class="sc">+</span> race <span class="sc">+</span> sector, </span>
+<span id="cb326-9"><a href="regression-with-r.html#cb326-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family=</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>), </span>
+<span id="cb326-10"><a href="regression-with-r.html#cb326-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data=</span>marriage)</span>
+<span id="cb326-11"><a href="regression-with-r.html#cb326-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb326-12"><a href="regression-with-r.html#cb326-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb326-13"><a href="regression-with-r.html#cb326-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot regression</span></span>
+<span id="cb326-14"><a href="regression-with-r.html#cb326-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb326-15"><a href="regression-with-r.html#cb326-15" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(married_glm, <span class="st">&quot;age&quot;</span>,</span>
+<span id="cb326-16"><a href="regression-with-r.html#cb326-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">by =</span> <span class="st">&quot;sex&quot;</span>,</span>
+<span id="cb326-17"><a href="regression-with-r.html#cb326-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">line=</span><span class="fu">list</span>(<span class="at">col=</span><span class="st">&quot;red&quot;</span>),</span>
+<span id="cb326-18"><a href="regression-with-r.html#cb326-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">gg =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb326-19"><a href="regression-with-r.html#cb326-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">scale=</span><span class="st">&quot;response&quot;</span>) <span class="sc">+</span></span>
+<span id="cb326-20"><a href="regression-with-r.html#cb326-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Prob(Married)&quot;</span>, </span>
+<span id="cb326-21"><a href="regression-with-r.html#cb326-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb326-22"><a href="regression-with-r.html#cb326-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Relationship of age and marital status&quot;</span>,</span>
+<span id="cb326-23"><a href="regression-with-r.html#cb326-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;controlling for race and job sector&quot;</span>,</span>
+<span id="cb326-24"><a href="regression-with-r.html#cb326-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;source: Current Population Survey 1985&quot;</span>)</span></code></pre></div>
+<p><img src="Rmanual_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+</div>
+<div id="anova-with-r" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Anova with R<a href="regression-with-r.html#anova-with-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>ANOVA is one of the most often used statistical techniques in the field of ecological and environmental studies. It is also widely used in many social science areas, including as sociology, psychology, communication, and media studies.</p>
+<p>Let’s review a few key definitions in order to better understand ANOVA.</p>
+<ul>
+<li><p>Categorical variables have a limited number of categories or groupings, such as treatments, material type, and payment method.</p></li>
+<li><p>Continuous variables, such as time and height, have an endless number of values between any two values.</p></li>
+<li><p>An explanatory variable (also known as a <strong>independent variable, factor, treatment, or predictor variable</strong>) in an experiment is a variable that is changed to examine how it impacts a response variable (also called dependent variable or outcome variable).</p></li>
+</ul>
+<p><strong>The explanatory variable is the CAUSE and the response variable is the EFFECT.</strong></p>
+<p>The analysis of variance (ANOVA) is used to determine how a continuous dependent variable (y) varies across levels of one or more categorical independent variables (x). As explained above, the latter are often referred to as “factors”. Within each factor, there may be different categories called levels.</p>
+<p>You probably guessed it by now: ANOVA = Analysis of Variance!</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="regression-with-r.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb327-2"><a href="regression-with-r.html#cb327-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb327-3"><a href="regression-with-r.html#cb327-3" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/mpg.csv&quot;</span>,<span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb327-4"><a href="regression-with-r.html#cb327-4" aria-hidden="true" tabindex="-1"></a>mpg<span class="sc">$</span>cyl <span class="ot">&lt;-</span> <span class="fu">factor</span>(mpg<span class="sc">$</span>cyl)</span>
+<span id="cb327-5"><a href="regression-with-r.html#cb327-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb327-6"><a href="regression-with-r.html#cb327-6" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb327-7"><a href="regression-with-r.html#cb327-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>class, <span class="at">y=</span>displ, <span class="at">color=</span>class))<span class="sc">+</span></span>
+<span id="cb327-8"><a href="regression-with-r.html#cb327-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> F)<span class="sc">+</span></span>
+<span id="cb327-9"><a href="regression-with-r.html#cb327-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb327-10"><a href="regression-with-r.html#cb327-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Class Type&quot;</span>, <span class="at">y=</span><span class="st">&quot;Displacement&quot;</span>)</span></code></pre></div>
+<p><img src="Rmanual_files/figure-html/mpg_box-1.png" width="672" /></p>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="regression-with-r.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test outliers</span></span>
+<span id="cb328-2"><a href="regression-with-r.html#cb328-2" aria-hidden="true" tabindex="-1"></a>mpg  <span class="sc">%&gt;%</span></span>
+<span id="cb328-3"><a href="regression-with-r.html#cb328-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span> </span>
+<span id="cb328-4"><a href="regression-with-r.html#cb328-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identify_outliers</span>(displ)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 14
+##   class          X manuf…¹ model displ  year cyl   trans drv     cty   hwy fl   
+##   &lt;fct&gt;      &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;dbl&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;
+## 1 2seater       28 chevro… corv…   7    2008 8     manu… r        15    24 p    
+## 2 midsize      159 pontiac gran…   5.3  2008 8     auto… f        16    25 p    
+## 3 minivan       38 dodge   cara…   2.4  1999 4     auto… f        18    24 r    
+## 4 subcompact    99 ford    must…   5.4  2008 8     manu… r        14    20 p    
+## # … with 2 more variables: is.outlier &lt;lgl&gt;, is.extreme &lt;lgl&gt;, and abbreviated
+## #   variable name ¹​manufacturer</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="regression-with-r.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="do">## get summary stat</span></span>
+<span id="cb330-2"><a href="regression-with-r.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb330-3"><a href="regression-with-r.html#cb330-3" aria-hidden="true" tabindex="-1"></a>mpg  <span class="sc">%&gt;%</span></span>
+<span id="cb330-4"><a href="regression-with-r.html#cb330-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span> </span>
+<span id="cb330-5"><a href="regression-with-r.html#cb330-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_summary_stats</span>(displ, <span class="at">type =</span> <span class="st">&quot;mean_sd&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 5
+##   class      variable     n  mean    sd
+##   &lt;fct&gt;      &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2seater    displ        5  6.16 0.532
+## 2 compact    displ       47  2.33 0.452
+## 3 midsize    displ       41  2.92 0.719
+## 4 minivan    displ       11  3.39 0.453
+## 5 pickup     displ       33  4.42 0.829
+## 6 subcompact displ       35  2.66 1.10 
+## 7 suv        displ       62  4.46 1.07</code></pre>
+<div id="steps-to-conduct-an-anova" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> 3 Steps to conduct an ANOVA<a href="regression-with-r.html#steps-to-conduct-an-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Here are the 3 steps you should follow to conduct a standard ANOVA in R:</p>
+<ol style="list-style-type: decimal">
+<li>Create an ANOVA object using the <code>aov()</code> function. In the <code>aov()</code> function, specify the independent and dependent variable(s) with a formula with the format <code>y ~ x1 + x2</code> where y is the dependent variable, and x1, x2 … are one (more more) factor independent variables.</li>
+</ol>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="regression-with-r.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Create an aov object</span></span>
+<span id="cb332-2"><a href="regression-with-r.html#cb332-2" aria-hidden="true" tabindex="-1"></a>mod_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="at">formula =</span> y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> ...,</span>
+<span id="cb332-3"><a href="regression-with-r.html#cb332-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> data)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Create a summary ANOVA table by applying the summary() function to the ANOVA object you created in Step 1.</li>
+</ol>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="regression-with-r.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Look at a summary of the aov object</span></span>
+<span id="cb333-2"><a href="regression-with-r.html#cb333-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_aov)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>If necessary, calculate post-hoc tests by applying a post-hoc testing function like <code>TukeyHSD()</code> to the ANOVA object you created in Step 1.</li>
+</ol>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="regression-with-r.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Calculate post-hoc tests</span></span>
+<span id="cb334-2"><a href="regression-with-r.html#cb334-2" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(mod_aov)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="regression-with-r.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Setup Null Hypothesis and Alternate Hypothesis</span></span>
+<span id="cb335-2"><a href="regression-with-r.html#cb335-2" aria-hidden="true" tabindex="-1"></a><span class="co"># H0 = mu = mu01 = mu02(There is no difference</span></span>
+<span id="cb335-3"><a href="regression-with-r.html#cb335-3" aria-hidden="true" tabindex="-1"></a><span class="co"># between average displacement for different class)</span></span>
+<span id="cb335-4"><a href="regression-with-r.html#cb335-4" aria-hidden="true" tabindex="-1"></a><span class="co"># H1 = Not all means are equal</span></span>
+<span id="cb335-5"><a href="regression-with-r.html#cb335-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Calculate test statistics using aov function</span></span>
+<span id="cb335-6"><a href="regression-with-r.html#cb335-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-7"><a href="regression-with-r.html#cb335-7" aria-hidden="true" tabindex="-1"></a>mpg_aov1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(displ<span class="sc">~</span> class<span class="sc">+</span> cyl, <span class="at">data =</span> mpg)</span>
+<span id="cb335-8"><a href="regression-with-r.html#cb335-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-9"><a href="regression-with-r.html#cb335-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mpg_aov1)</span></code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## class         6 223.09   37.18   249.0 &lt;2e-16 ***
+## cyl           3 132.37   44.12   295.4 &lt;2e-16 ***
+## Residuals   224  33.45    0.15                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="regression-with-r.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">capture.output</span>(<span class="fu">summary</span>(mpg_aov1), <span class="at">file =</span> <span class="st">&quot;data/mpg_anova1.doc&quot;</span>)</span></code></pre></div>
+<p>One of the most common post-hoc tests for standard ANOVAs is the Tukey Honestly Significant Difference (HSD) test:</p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="regression-with-r.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(mpg_aov1,<span class="at">which =</span> <span class="st">&#39;class&#39;</span>)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = displ ~ class + cyl, data = mpg)
+## 
+## $class
+##                           diff         lwr          upr     p adj
+## compact-2seater    -3.83446809 -4.37535422 -3.293581954 0.0000000
+## midsize-2seater    -3.23804878 -3.78272710 -2.693370459 0.0000000
+## minivan-2seater    -2.76909091 -3.38926947 -2.148912344 0.0000000
+## pickup-2seater     -1.74181818 -2.29362610 -1.190010259 0.0000000
+## subcompact-2seater -3.50000000 -4.04972954 -2.950270458 0.0000000
+## suv-2seater        -1.70354839 -2.23810617 -1.168990601 0.0000000
+## midsize-compact     0.59641930  0.35070039  0.842138217 0.0000000
+## minivan-compact     1.06537718  0.68024764  1.450506716 0.0000000
+## pickup-compact      2.09264990  1.83150762  2.353792188 0.0000000
+## subcompact-compact  0.33446809  0.07774668  0.591189490 0.0026292
+## suv-compact         2.13091970  1.90853414  2.353305256 0.0000000
+## minivan-midsize     0.46895787  0.07852039  0.859395356 0.0077517
+## pickup-midsize      1.49623060  1.22732177  1.765139431 0.0000000
+## subcompact-midsize -0.26195122 -0.52656896  0.002666517 0.0543309
+## suv-midsize         1.53450039  1.30304413  1.765956660 0.0000000
+## pickup-minivan      1.02727273  0.62694918  1.427596270 0.0000000
+## subcompact-minivan -0.73090909 -1.12836289 -0.333455288 0.0000025
+## suv-minivan         1.06554252  0.68935243  1.441732610 0.0000000
+## subcompact-pickup  -1.75818182 -2.03718013 -1.479183510 0.0000000
+## suv-pickup          0.03826979 -0.20949928  0.286038866 0.9992811
+## suv-subcompact      1.79645161  1.55334649  2.039556733 0.0000000</code></pre>
+<p>This table displays the differences between each group pair. The diff column displays the mean differences between groups (which, thankfully, are identical to what we saw in the regression object summary earlier), a confidence interval for the difference, and a p-value testing the null hypothesis that the group differences are not different.</p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="regression-with-r.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Setup Null Hypothesis and Alternate Hypothesis</span></span>
+<span id="cb340-2"><a href="regression-with-r.html#cb340-2" aria-hidden="true" tabindex="-1"></a><span class="co"># H0 = mu = mu01 = mu02(There is no difference</span></span>
+<span id="cb340-3"><a href="regression-with-r.html#cb340-3" aria-hidden="true" tabindex="-1"></a><span class="co"># between average displacement for different class)</span></span>
+<span id="cb340-4"><a href="regression-with-r.html#cb340-4" aria-hidden="true" tabindex="-1"></a><span class="co"># H1 = Not all means are equal</span></span>
+<span id="cb340-5"><a href="regression-with-r.html#cb340-5" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/mpg.csv&quot;</span>,<span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb340-6"><a href="regression-with-r.html#cb340-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Calculate test statistics using aov function with interaction</span></span>
+<span id="cb340-7"><a href="regression-with-r.html#cb340-7" aria-hidden="true" tabindex="-1"></a>mpg_aov2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(displ<span class="sc">~</span> class<span class="sc">+</span> cyl<span class="sc">:</span>class, <span class="at">data =</span> mpg)</span>
+<span id="cb340-8"><a href="regression-with-r.html#cb340-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mpg_aov2)</span></code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## class         6 223.09   37.18   258.0 &lt;2e-16 ***
+## class:cyl     6 133.98   22.33   154.9 &lt;2e-16 ***
+## Residuals   221  31.85    0.14                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="regression-with-r.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">capture.output</span>(<span class="fu">summary</span>(mpg_aov2), <span class="at">file =</span> <span class="st">&quot;data/mpg_anova2.doc&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Quantile-Quantile Plots (or QQ-Plots) compare the quantiles between two distributions - typically the observed distribution and an assumed distribution like the normal distribution. If the points fall on the diagonal line, then the distributions match. If the points differ from the diagonal line, then the distributions differ.</li>
+</ul>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="regression-with-r.html#cb343-1" aria-hidden="true" tabindex="-1"></a>qq_mpg <span class="ot">&lt;-</span> mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb343-2"><a href="regression-with-r.html#cb343-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>displ)) <span class="sc">+</span></span>
+<span id="cb343-3"><a href="regression-with-r.html#cb343-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>(<span class="at">color=</span><span class="st">&#39;blue&#39;</span>)<span class="sc">+</span></span>
+<span id="cb343-4"><a href="regression-with-r.html#cb343-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>(<span class="at">color=</span><span class="st">&#39;red&#39;</span>, <span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb343-5"><a href="regression-with-r.html#cb343-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Theoretial Quantities&quot;</span>)<span class="sc">+</span></span>
+<span id="cb343-6"><a href="regression-with-r.html#cb343-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Standard Residuals&quot;</span>)<span class="sc">+</span></span>
+<span id="cb343-7"><a href="regression-with-r.html#cb343-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Normal Q-Q&quot;</span>)<span class="sc">+</span></span>
+<span id="cb343-8"><a href="regression-with-r.html#cb343-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="regression-with-r.html#cb344-1" aria-hidden="true" tabindex="-1"></a>mpg_residuals <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(mpg_aov1<span class="sc">$</span>residuals)</span>
+<span id="cb344-2"><a href="regression-with-r.html#cb344-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mpg_residuals) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;residuals&quot;</span>)</span>
+<span id="cb344-3"><a href="regression-with-r.html#cb344-3" aria-hidden="true" tabindex="-1"></a>mpg_residuals</span></code></pre></div>
+<pre><code>##         residuals
+## 1   -0.2038584618
+## 2   -0.2038584618
+## 3   -0.0038584618
+## 4   -0.0038584618
+## 5   -0.2948653396
+## 6   -0.2948653396
+## 7    0.0051346604
+## 8   -0.2038584618
+## 9   -0.2038584618
+## 10  -0.0038584618
+## 11  -0.0038584618
+## 12  -0.2948653396
+## 13  -0.2948653396
+## 14   0.0051346604
+## 15   0.0051346604
+## 16  -0.4798846195
+## 17  -0.1798846195
+## 18  -0.4703049429
+## 19   0.1645460841
+## 20   0.1645460841
+## 21   0.1645460841
+## 22   0.5645460841
+## 23   0.8645460841
+## 24  -0.4600000000
+## 25  -0.4600000000
+## 26   0.0400000000
+## 27   0.0400000000
+## 28   0.8400000000
+## 29   0.1645460841
+## 30   0.1645460841
+## 31   0.5645460841
+## 32   1.3645460841
+## 33   0.2111222583
+## 34   0.2111222583
+## 35  -0.1798846195
+## 36   0.2201153805
+## 37   0.3201153805
+## 38   0.0009153434
+## 39  -0.4900915343
+## 40  -0.1900915343
+## 41  -0.1900915343
+## 42  -0.1900915343
+## 43  -0.1900915343
+## 44  -0.1900915343
+## 45   0.3099084657
+## 46   0.3099084657
+## 47   0.3099084657
+## 48   0.5099084657
+## 49   0.0253147223
+## 50   0.0253147223
+## 51   0.2253147223
+## 52   0.2253147223
+## 53  -0.3651056012
+## 54  -0.3651056012
+## 55  -0.3651056012
+## 56   0.1348943988
+## 57   0.1348943988
+## 58   0.1549664076
+## 59  -0.4354539159
+## 60  -0.4354539159
+## 61  -0.4354539159
+## 62   0.0645460841
+## 63   0.5645460841
+## 64   0.7645460841
+## 65  -0.3651056012
+## 66  -0.3651056012
+## 67  -0.3651056012
+## 68  -0.3651056012
+## 69  -0.3651056012
+## 70  -0.3651056012
+## 71   0.1348943988
+## 72   0.1348943988
+## 73   0.6348943988
+## 74   0.8348943988
+## 75  -0.5354539159
+## 76   0.2645460841
+## 77   0.2645460841
+## 78   0.2549664076
+## 79   0.2549664076
+## 80   0.2549664076
+## 81   0.2549664076
+## 82  -0.5354539159
+## 83  -0.1354539159
+## 84   0.5253147223
+## 85   0.5253147223
+## 86  -0.4651056012
+## 87  -0.4651056012
+## 88  -0.4651056012
+## 89   0.3348943988
+## 90   0.3348943988
+## 91   0.6484144660
+## 92   0.6484144660
+## 93   0.8484144660
+## 94   0.8484144660
+## 95   0.0579941426
+## 96   0.0579941426
+## 97   0.0579941426
+## 98   0.0579941426
+## 99   0.8579941426
+## 100 -0.4605786562
+## 101 -0.4605786562
+## 102 -0.4605786562
+## 103 -0.4605786562
+## 104 -0.4605786562
+## 105 -0.2605786562
+## 106 -0.2605786562
+## 107 -0.2605786562
+## 108 -0.0605786562
+## 109  0.2111222583
+## 110  0.2111222583
+## 111  0.2111222583
+## 112  0.2111222583
+## 113 -0.7798846195
+## 114 -0.7798846195
+## 115  0.0201153805
+## 116 -0.0605786562
+## 117 -0.0605786562
+## 118 -0.0605786562
+## 119 -0.0605786562
+## 120 -0.4515855340
+## 121 -0.4515855340
+## 122 -0.4515855340
+## 123 -0.7450335924
+## 124 -0.0450335924
+## 125  0.2549664076
+## 126 -0.4354539159
+## 127 -0.4354539159
+## 128 -0.4354539159
+## 129  0.5645460841
+## 130  0.9645460841
+## 131 -1.1354539159
+## 132 -0.9354539159
+## 133 -0.7354539159
+## 134 -0.5354539159
+## 135  0.2645460841
+## 136  0.2645460841
+## 137  0.2645460841
+## 138  0.2549664076
+## 139  0.2549664076
+## 140 -0.5354539159
+## 141 -0.1354539159
+## 142  0.3961415382
+## 143  0.3961415382
+## 144  0.3111222583
+## 145  0.3111222583
+## 146  0.2201153805
+## 147  0.2201153805
+## 148 -0.2798846195
+## 149 -0.2798846195
+## 150  0.2201153805
+## 151 -0.4450335924
+## 152 -0.4450335924
+## 153  0.2549664076
+## 154  0.4645460841
+## 155 -0.1798846195
+## 156  0.5201153805
+## 157  0.5201153805
+## 158  0.5201153805
+## 159  0.6296950571
+## 160 -0.1540267147
+## 161 -0.1540267147
+## 162 -0.1540267147
+## 163 -0.1540267147
+## 164 -0.1540267147
+## 165 -0.1540267147
+## 166  0.1394213438
+## 167  0.1394213438
+## 168  0.4394213438
+## 169  0.4394213438
+## 170  0.4961415382
+## 171  0.4961415382
+## 172  0.4961415382
+## 173  0.4961415382
+## 174  0.0459732853
+## 175  0.0459732853
+## 176 -0.3450335924
+## 177 -0.3450335924
+## 178  0.2549664076
+## 179 -0.4354539159
+## 180  0.0111222583
+## 181  0.0111222583
+## 182  0.2111222583
+## 183  0.2111222583
+## 184 -0.2798846195
+## 185 -0.2798846195
+## 186  0.2201153805
+## 187  0.1961415382
+## 188  0.1961415382
+## 189  0.3961415382
+## 190  0.3961415382
+## 191 -0.0948653396
+## 192 -0.0948653396
+## 193  0.2051346604
+## 194 -0.2038584618
+## 195 -0.2038584618
+## 196 -0.2038584618
+## 197 -0.2038584618
+## 198 -0.2038584618
+## 199 -0.4354539159
+## 200  0.5645460841
+## 201  0.1163216001
+## 202  0.1163216001
+## 203  0.1163216001
+## 204 -0.2746852777
+## 205 -0.2746852777
+## 206  0.3253147223
+## 207  0.3253147223
+## 208 -0.0038584618
+## 209 -0.0038584618
+## 210 -0.0038584618
+## 211 -0.0038584618
+## 212 -0.2948653396
+## 213 -0.1038584618
+## 214 -0.0038584618
+## 215 -0.0038584618
+## 216 -0.0038584618
+## 217 -0.0038584618
+## 218  0.0283600972
+## 219  0.0283600972
+## 220 -0.2948653396
+## 221 -0.2948653396
+## 222 -0.1605786562
+## 223 -0.1605786562
+## 224 -0.0605786562
+## 225 -0.0605786562
+## 226 -0.0283600972
+## 227 -0.0283600972
+## 228 -0.3888777417
+## 229 -0.3888777417
+## 230 -0.1888777417
+## 231 -0.1888777417
+## 232 -0.4798846195
+## 233 -0.4798846195
+## 234  0.3201153805</code></pre>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="regression-with-r.html#cb346-1" aria-hidden="true" tabindex="-1"></a>hist_mpg <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>mpg_residuals, <span class="fu">aes</span>(<span class="at">x=</span>residuals)) <span class="sc">+</span> </span>
+<span id="cb346-2"><a href="regression-with-r.html#cb346-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">by=</span><span class="dv">1</span>), </span>
+<span id="cb346-3"><a href="regression-with-r.html#cb346-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">col=</span><span class="st">&quot;red&quot;</span>, </span>
+<span id="cb346-4"><a href="regression-with-r.html#cb346-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">&quot;blue&quot;</span>, </span>
+<span id="cb346-5"><a href="regression-with-r.html#cb346-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb346-6"><a href="regression-with-r.html#cb346-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Histogram for anova residuals&quot;</span>, <span class="at">x=</span><span class="st">&quot;Residuals&quot;</span>, <span class="at">y=</span><span class="st">&quot;Frequency&quot;</span>)<span class="sc">+</span> </span>
+<span id="cb346-7"><a href="regression-with-r.html#cb346-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="regression-with-r.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Condition of Linear Regression(LINE)</span></span>
+<span id="cb347-2"><a href="regression-with-r.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="co"># L: Linear</span></span>
+<span id="cb347-3"><a href="regression-with-r.html#cb347-3" aria-hidden="true" tabindex="-1"></a><span class="co"># I : The errors e_i are independent</span></span>
+<span id="cb347-4"><a href="regression-with-r.html#cb347-4" aria-hidden="true" tabindex="-1"></a><span class="co"># N : the errors are  normally distributed </span></span>
+<span id="cb347-5"><a href="regression-with-r.html#cb347-5" aria-hidden="true" tabindex="-1"></a><span class="co"># E : the errors have equal variance</span></span>
+<span id="cb347-6"><a href="regression-with-r.html#cb347-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create grid</span></span>
+<span id="cb347-7"><a href="regression-with-r.html#cb347-7" aria-hidden="true" tabindex="-1"></a>mpg_out <span class="ot">&lt;-</span> ggpubr<span class="sc">::</span><span class="fu">ggarrange</span>(hist_mpg, qq_mpg, <span class="co"># list of plots</span></span>
+<span id="cb347-8"><a href="regression-with-r.html#cb347-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;(a)&quot;</span>, <span class="st">&quot;(b)&quot;</span>), <span class="co"># labels</span></span>
+<span id="cb347-9"><a href="regression-with-r.html#cb347-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">common.legend =</span> F, <span class="co"># COMMON LEGEND</span></span>
+<span id="cb347-10"><a href="regression-with-r.html#cb347-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">legend =</span> <span class="st">&quot;bottom&quot;</span>, <span class="co"># legend position</span></span>
+<span id="cb347-11"><a href="regression-with-r.html#cb347-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">align =</span> <span class="st">&quot;hv&quot;</span>, <span class="co"># Align them both, horizontal and vertical</span></span>
+<span id="cb347-12"><a href="regression-with-r.html#cb347-12" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">2</span>,  <span class="co"># number of rows</span></span>
+<span id="cb347-13"><a href="regression-with-r.html#cb347-13" aria-hidden="true" tabindex="-1"></a>                          <span class="at">label.x =</span> <span class="dv">0</span>,  <span class="at">label.y=</span>.<span class="dv">99</span>,</span>
+<span id="cb347-14"><a href="regression-with-r.html#cb347-14" aria-hidden="true" tabindex="-1"></a>                          <span class="at">font.label =</span> <span class="fu">list</span>(<span class="at">color=</span><span class="st">&#39;blue&#39;</span>,<span class="at">size=</span><span class="dv">14</span>)</span>
+<span id="cb347-15"><a href="regression-with-r.html#cb347-15" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb347-16"><a href="regression-with-r.html#cb347-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-17"><a href="regression-with-r.html#cb347-17" aria-hidden="true" tabindex="-1"></a>mpg_out</span></code></pre></div>
+<p><img src="Rmanual_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="regression-with-r.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&#39;fig/pfgplot8.png&#39;</span>, mpg_out,<span class="at">width=</span><span class="dv">10</span>, <span class="at">dpi=</span><span class="dv">300</span>)</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-visualization-with-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="scientific-publishing-with-quarto-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mesfind/Proposal/edit/master/Chapter4.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": [["Rmanual.pdf", "PDF"], ["Rmanual.epub", "EPUB"], ["Rmanual.docx", "Word"]],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
